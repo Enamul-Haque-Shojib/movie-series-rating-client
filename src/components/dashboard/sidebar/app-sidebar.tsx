@@ -1,0 +1,77 @@
+"use client";
+
+import * as React from "react";
+
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-user";
+import Link from "next/link";
+// import Logo from "@/assets/svgs/Logo";
+import { User, Package,Gauge, Users, List } from "lucide-react";
+import { useUser } from "@/context/UserContext";
+
+
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const {user} = useUser();
+
+    const role1 = user?.role === "ADMIN" ? "admin" : "user"
+
+    const data = {
+  
+      Admin: [
+        { title: "Dashboard", url: "/dashboard", icon: Gauge, isActive: true, },
+        { title: "Media Management", url: `/dashboard/${role1}/listing`, icon: Users },
+        { title: "Listing Management", url: "/dashboard/admin/listing-management", icon: List },
+        { title: "My Profile", url: "/dashboard/admin/profile", icon: User },
+      ],
+      User: [
+        { title: "Dashboard", url: "/dashboard", icon: Gauge, isActive: true, },
+        { title: "Manage Listings", url: "/dashboard/listing", icon: Package },
+        { title: "Track Purchases", url: "/dashboard/purchase-history", icon: Package },
+        { title: "Track Sales", url: "/dashboard/sales-history", icon: Package },
+        // { title: "WishList", url: "/dashboard/wishlist", icon: Heart },
+        { title: "Profile", url: "/dashboard/profile", icon: User },
+      ],
+   
+};
+  return (
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <Link href="/">
+                <div className="flex items-center justify-center">
+                  {/* <Logo /> */}
+                  <h1 className="text-xl">DS</h1>
+                </div>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <h2 className="font-bold text-xl">Dream Shop</h2>
+                </div>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        {
+            user?.role == 'ADMIN' ? <NavMain items={data.Admin} /> : <NavMain items={data.User} />
+        }
+        
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
+    </Sidebar>
+  );
+}
