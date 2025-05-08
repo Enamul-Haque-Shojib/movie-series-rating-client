@@ -45,6 +45,7 @@ const {user} = useUser()
         defaultValues: {
             title: '',
             image: null,
+            director: '',
             description: '',
             synopsis: '',
             year:'',
@@ -67,6 +68,7 @@ const {user} = useUser()
         const initialData:TMedia= {
             title: data.title,
             image,
+            director: data.director,
             description: data.description,
             synopsis: data.synopsis,
             year: data.year,
@@ -77,13 +79,13 @@ const {user} = useUser()
             streamingPlatform: data. streamingPlatform
            
         };
-console.log(initialData)
-    
+
+    console.log(initialData)
 
         try {
             
            const res = await addItem(initialData);
-           console.log(res)
+           
             
             //  form.reset();
              toast.success(res.message);
@@ -152,6 +154,16 @@ console.log(initialData)
                                     <FormMessage />
                                 </FormItem>
                             )} />
+
+                             <FormField control={form.control} name="director" render={({ field }) => (
+                                                                                       <FormItem>
+                                                                                           <FormLabel>Director Name</FormLabel>
+                                                                                           <FormControl>
+                                                                                               <Input placeholder="Enter director name" required {...field} />
+                                                                                           </FormControl>
+                                                                                           <FormMessage />
+                                                                                       </FormItem>
+                                                                                   )} />
 
 
                             <FormField control={form.control} name="year" render={({ field }) => (

@@ -34,6 +34,7 @@ export type TMedia={
     id?: string;
     title: string,
             image:string,
+            director: string,
             description: string,
             synopsis: string,
             year: string,

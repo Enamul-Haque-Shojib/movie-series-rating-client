@@ -47,6 +47,7 @@ const UpdateItemForm = () => {
             defaultValues: {
               title: '',
               image: null,
+              director: '',
               description: '',
               synopsis: '',
               year:'',
@@ -70,6 +71,7 @@ const UpdateItemForm = () => {
                 form.reset({
                     title: item.title,
                     image: item.image,
+                    director: item.director,
                     description: item.description,
                     synopsis: item.synopsis,
                     year: item.year,
@@ -110,6 +112,7 @@ const UpdateItemForm = () => {
         const updatedItem : TMedia = {
           title: data.title,
           image,
+          director: data.director,
           description: data.description,
           synopsis: data.synopsis,
           year: data.year,
@@ -193,6 +196,15 @@ const UpdateItemForm = () => {
                                                                                            <FormMessage />
                                                                                        </FormItem>
                                                                                    )} />
+                                                                                     <FormField control={form.control} name="director" render={({ field }) => (
+                                                           <FormItem>
+                                                               <FormLabel>Director Name</FormLabel>
+                                                               <FormControl>
+                                                                   <Input placeholder="Enter director name" required {...field} />
+                                                               </FormControl>
+                                                               <FormMessage />
+                                                           </FormItem>
+                                                       )} />
                            
                            
                                                        <FormField control={form.control} name="year" render={({ field }) => (

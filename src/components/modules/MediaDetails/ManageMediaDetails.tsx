@@ -115,10 +115,27 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUser } from "@/context/UserContext";
+import { TMedia } from "@/types/item";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Image from "next/image";
 
-export default function MovieDetailsPage() {
-  const [showSpoiler, setShowSpoiler] = useState(false);
+interface ManageMediaDetailsProps {
+  media: TMedia;  // Explicitly type the product prop
+}
+const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
+    const { user, isLoading, setIsLoading } = useUser();
+    const [showSpoiler, setShowSpoiler] = useState(false);
+  
+    console.log(media)
+    
+    const { id, title, description, synopsis, director, image, status, buy_price, rent_price, year, like, unlike, genre, streamingPlatform, streamingLinks } = media;
+    // const [statusItem, setStatusItem] = useState(status)
+    useEffect(() => {
+      if(media) setIsLoading(false);
+    },[media, setIsLoading])
+ 
 
   const metadata = {
     title: "Inception",
@@ -133,27 +150,44 @@ export default function MovieDetailsPage() {
     likes: 134,
   };
 
+    if(isLoading){
+    return <p className="text-center text-lg font-medium text-gray-700 dark:text-gray-300">Loading...</p>
+  }
+
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div className="flex flex-col md:flex-row gap-6">
-        <img
+        {/* <img
           src={metadata.posterUrl}
           alt="Poster"
+        
           className="w-full md:w-64 rounded-xl shadow-md"
-        />
+        /> */}
+          <AspectRatio ratio={16 / 9} className="bg-muted">
+      <Image
+        src={image}
+        alt="Photo by Drew Beamer"
+        fill
+        className="h-full w-full rounded-md object-cover"
+      />
+    </AspectRatio> 
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold">{metadata.title}</h1>
+          <h1 className="text-3xl font-bold">{title}</h1>
+          <h1 className="text-muted-foreground">Description: {description}</h1>
+          <h1 className="text-muted-foreground">Synopsis: {synopsis}</h1>
           <p className="text-muted-foreground">
-            {metadata.year} • Directed by {metadata.director}
+            {year} • Directed by {director}
           </p>
-          <p className="text-muted-foreground">
+          {/* <p className="text-muted-foreground">
             Cast: {metadata.cast.join(", ")}
-          </p>
-          <div className="flex gap-2">
+          </p> */}
+          {/* <div className="flex gap-2">
             {metadata.tags.map((tag) => (
               <Badge key={tag}>{tag}</Badge>
             ))}
-          </div>
+          </div> */}
+          <p className="text-muted-foreground">Buy price: {buy_price}</p>
+          <p className="text-muted-foreground">Rent price: {rent_price}</p>
           <Button variant="outline">Buy / Rent</Button>
         </div>
       </div>
@@ -164,7 +198,7 @@ export default function MovieDetailsPage() {
         <CardContent className="p-4 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              jjjjjjjjjjj
+              
               <Avatar>
                 <AvatarImage src="/https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="User" />
               </Avatar>
@@ -196,4 +230,6 @@ export default function MovieDetailsPage() {
     </div>
   );
 } 
+
+export default ManageMediaDetails;
 
