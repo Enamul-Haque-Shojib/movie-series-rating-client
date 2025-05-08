@@ -42,6 +42,7 @@ export type TMedia={
             status: string,
             genre: string,
             streamingPlatform: string,
+            streamingLinks: string,
             // like: {
             //   id: string;
             //   userId: string;

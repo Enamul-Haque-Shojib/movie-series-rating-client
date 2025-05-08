@@ -52,7 +52,7 @@ const ManageItems = () => {
   return (
     <div className="container mx-auto px-6 py-8 space-y-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold text-gray-800">All Items</h1>
+        <h1 className="text-2xl font-semibold text-gray-800">All Movies and Series</h1>
         <Button
           onClick={() => router.push("/dashboard/admin/listing/add-item")}
           size="sm"
@@ -73,6 +73,9 @@ const ManageItems = () => {
               <TableHead>Year</TableHead>
               <TableHead>BuyPrice</TableHead>
               <TableHead>RentPrice</TableHead>
+              <TableHead>Genre</TableHead>
+              <TableHead>Platform</TableHead>
+             
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Action</TableHead>
             </TableRow>
@@ -95,6 +98,9 @@ const ManageItems = () => {
                 <TableCell>{item.year}</TableCell>
                 <TableCell>{item.buy_price}</TableCell>
                 <TableCell>{item.rent_price}</TableCell>
+                <TableCell>{item.genre}</TableCell>
+                <TableCell>{item.streamingPlatform}</TableCell>
+               
                 <TableCell>{item.status}</TableCell>
                 <TableCell className="text-right flex gap-2 items-center justify-end">
                   <button

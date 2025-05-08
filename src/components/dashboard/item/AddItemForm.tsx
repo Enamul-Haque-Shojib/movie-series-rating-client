@@ -158,7 +158,7 @@ console.log(initialData)
                                 <FormItem>
                                     <FormLabel>Year</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Enter Price" required {...field} />
+                                        <Input placeholder="Enter Year" required {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -201,11 +201,7 @@ console.log(initialData)
                   <SelectContent  className="w-auto p-0 bg-white border border-gray-200 shadow-lg rounded-md z-50">
                     <SelectGroup>
                       <SelectLabel>Media Status</SelectLabel>
-                      {/* {deliverMen.map((man) => ( */}
-                        {/* <SelectItem key={man._id} value={man.authId}>
-                          {man.authId}
-                        </SelectItem> */}
-                      {/* ))} */}
+                    
                       <SelectItem value='MOVIE'>Movie</SelectItem>
                       <SelectItem value='SERIES'>Series</SelectItem>
                     
@@ -218,6 +214,8 @@ console.log(initialData)
             </FormItem>
           )}
         />
+
+        
 <FormField
           control={form.control}
           name="genre"
