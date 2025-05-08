@@ -63,6 +63,7 @@ export default function HomePage() {
   return (
     <div className="p-6 space-y-10">
       <h1 className="text-4xl font-bold">Movie & Series Portal</h1>
+      <i className="fa-solid fa-heart"></i>
 
       {/* Search and Filters */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">

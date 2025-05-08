@@ -5,6 +5,7 @@ import Providers from "@/providers/Providers";
 import { Toaster } from "sonner";
 import 'swiper/css';
 import 'swiper/css/navigation';
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      <Script
+          src="https://kit.fontawesome.com/178d1484e3.js"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
