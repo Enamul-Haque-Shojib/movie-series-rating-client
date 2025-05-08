@@ -56,10 +56,10 @@ const ManageItems = () => {
         <Button
           onClick={() => router.push("/dashboard/admin/listing/add-item")}
           size="sm"
-          className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white"
+          className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer"
         >
           <Plus className="w-5 h-5" />
-          <span>Add Product</span>
+          <span>Add Media</span>
         </Button>
       </div>
 

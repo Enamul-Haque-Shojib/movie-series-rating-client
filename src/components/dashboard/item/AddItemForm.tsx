@@ -46,10 +46,13 @@ const {user} = useUser()
             title: '',
             image: null,
             description: '',
+            synopsis: '',
             year:'',
             buy_price: '',
             rent_price: '',
             status: '',
+            genre: '',
+            streamingPlatform:''
         },
     });
 
@@ -65,10 +68,13 @@ const {user} = useUser()
             title: data.title,
             image,
             description: data.description,
+            synopsis: data.synopsis,
             year: data.year,
             buy_price: data.buy_price,
             rent_price: data.rent_price,
-            status: data.status
+            status: data.status,
+            genre: data.genre,
+            streamingPlatform: data. streamingPlatform
            
         };
 console.log(initialData)
@@ -77,9 +83,9 @@ console.log(initialData)
         try {
             
            const res = await addItem(initialData);
-           
+           console.log(res)
             
-             form.reset();
+            //  form.reset();
              toast.success(res.message);
             // toast({ title: "Success", description: "Project added successfully!" });
         } catch (error:any) {
@@ -137,6 +143,15 @@ console.log(initialData)
                                     <FormMessage />
                                 </FormItem>
                             )} />
+                            <FormField control={form.control} name="synopsis" render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Synopsis</FormLabel>
+                                    <FormControl>
+                                        <Textarea placeholder="Item Synopsis" required {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )} />
 
 
                             <FormField control={form.control} name="year" render={({ field }) => (
@@ -170,7 +185,7 @@ console.log(initialData)
 <FormField
           control={form.control}
           name="status"
-          rules={{ required: "Condition is required." }}
+          rules={{ required: "Status is required." }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Select Media Status</FormLabel>
@@ -181,7 +196,7 @@ console.log(initialData)
                   required
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a condition" />
+                    <SelectValue placeholder="choose a media status " />
                   </SelectTrigger>
                   <SelectContent  className="w-auto p-0 bg-white border border-gray-200 shadow-lg rounded-md z-50">
                     <SelectGroup>
@@ -199,6 +214,81 @@ console.log(initialData)
                 </Select>
               </FormControl>
               <FormDescription>Choose the Media Status.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+<FormField
+          control={form.control}
+          name="genre"
+          rules={{ required: "Genre is required." }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Media Genre</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  required
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Choose a genre" />
+                  </SelectTrigger>
+                  <SelectContent  className="w-auto p-0 bg-white border border-gray-200 shadow-lg rounded-md z-50">
+                    <SelectGroup>
+                      <SelectLabel>Media Genre</SelectLabel>
+                     
+                      <SelectItem value='Drama'> Drama</SelectItem>
+                      <SelectItem value='Comedy'>Comedy</SelectItem>
+                      <SelectItem value='Action'>Action</SelectItem>
+                      <SelectItem value='Horror'> Horror</SelectItem>
+                      <SelectItem value='Thriller'>Thriller </SelectItem>
+                      <SelectItem value='Sci-Fi'>Sci-Fi</SelectItem>
+                      <SelectItem value='Romance'>Romance</SelectItem>
+                      <SelectItem value='Fantasy'>Fantasy</SelectItem>
+                      <SelectItem value='Historical'> Historical</SelectItem>
+                    
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormDescription>Choose the Media Genre.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+<FormField
+          control={form.control}
+          name="streamingPlatform"
+          rules={{ required: "Streaming platform is required." }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Streaming Platform</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  required
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Choose a genre" />
+                  </SelectTrigger>
+                  <SelectContent  className="w-auto p-0 bg-white border border-gray-200 shadow-lg rounded-md z-50">
+                    <SelectGroup>
+                      <SelectLabel>Streaming Platform</SelectLabel>
+                     
+                      <SelectItem value='netflix'> Netflix</SelectItem>
+                      <SelectItem value='amazon_prime_video'>Amazon Prime Video</SelectItem>
+                      <SelectItem value='disney+'>Disney+</SelectItem>
+                      <SelectItem value='hbo_max'>HBO Max</SelectItem>
+                      <SelectItem value='apple_tv'>Apple TV</SelectItem>
+                      <SelectItem value='peacock'>Peacock</SelectItem>
+                    
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormDescription>Choose the Streaming Platform.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

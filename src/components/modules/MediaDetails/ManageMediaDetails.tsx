@@ -128,7 +128,7 @@ export default function MovieDetailsPage() {
     posterUrl: "https://image.tmdb.org/t/p/original/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
     rating: 9,
     review: "A mind-bending thriller that explores the nature of reality.",
-    spoiler: false,
+    spoiler: true,
     tags: ["classic", "mind-blowing"],
     likes: 134,
   };

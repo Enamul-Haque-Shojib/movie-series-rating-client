@@ -35,25 +35,28 @@ export type TMedia={
     title: string,
             image:string,
             description: string,
+            synopsis: string,
             year: string,
             buy_price: string,
             rent_price: string,
             status: string,
-            like: {
-              id: string;
-              userId: string;
-              mediaId: string;
-            }[];
-            unlike: {
-              id: string;
-              userId: string;
-              mediaId: string;
-            }[];
-            comment: {
-              id: string;
-              userId: string;
-              mediaId: string;
-              userComment: string;
-            }[];
+            genre: string,
+            streamingPlatform: string,
+            // like: {
+            //   id: string;
+            //   userId: string;
+            //   mediaId: string;
+            // }[];
+            // unlike: {
+            //   id: string;
+            //   userId: string;
+            //   mediaId: string;
+            // }[];
+            // comment: {
+            //   id: string;
+            //   userId: string;
+            //   mediaId: string;
+            //   userComment: string;
+            // }[];
             
 }
