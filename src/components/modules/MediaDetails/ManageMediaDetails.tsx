@@ -120,6 +120,8 @@ import { useUser } from "@/context/UserContext";
 import { TMedia } from "@/types/item";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import PayModal from "../../modal/PayModal";
 
 interface ManageMediaDetailsProps {
   media: TMedia;  // Explicitly type the product prop
@@ -188,7 +190,18 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
           </div> */}
           <p className="text-muted-foreground">Buy price: {buy_price}</p>
           <p className="text-muted-foreground">Rent price: {rent_price}</p>
-          <Button variant="outline">Buy / Rent</Button>
+          
+          <Dialog>
+                  <DialogTrigger asChild>
+                  {
+                    <Button variant="outline">Buy / Rent</Button>
+                  }
+                    
+                   
+                  </DialogTrigger>
+                  <PayModal mediaData={{ id, title,image, buy_price, rent_price }}></PayModal>
+                  
+                </Dialog>
         </div>
       </div>
 
@@ -200,7 +213,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
             <div className="flex items-center gap-3">
               
               <Avatar>
-                <AvatarImage src="/https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="User" />
+                <AvatarImage src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="User" />
               </Avatar>
               <div>
                 <p className="font-semibold">John Doe</p>

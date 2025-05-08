@@ -9,14 +9,35 @@ import { cookies } from "next/headers";
 export const addTransaction = async (transactionData: ITransaction): Promise<any> => {
     
     try {
-      const res = await fetch(`https://second-hand-marketplace-server.vercel.app/api/transactions/create-transaction`, 
+      const res = await fetch(`http://localhost:3001/api/purchases/add-purchase`, 
 
         {
         method: "POST",
         body: JSON.stringify(transactionData),
       
         headers: {
-          Authorization: (await cookies()).get("secondHandMarketplace_accessToken")!.value,
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
+        "Content-Type": "application/json",
+        },
+        // cache: 'no-store'
+      });
+      revalidateTag("TRANSACTION");
+      return res.json();
+    } catch (error: any) {
+      return Error(error);
+    }
+  };
+export const createPayment = async (payload:{id: string}): Promise<any> => {
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/purchases/create-payment`, 
+
+        {
+        method: "POST",
+        body: JSON.stringify(payload),
+      
+        headers: {
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
         "Content-Type": "application/json",
         },
         // cache: 'no-store'
@@ -36,7 +57,7 @@ export const updateTransaction = async (id: string): Promise<any> => {
       const res = await fetch(`https://second-hand-marketplace-server.vercel.app/api/transactions/update-transaction/${id}`, {
         method: "PATCH",
         headers: {
-          Authorization: (await cookies()).get("secondHandMarketplace_accessToken")!.value,
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
         "Content-Type": "application/json",
         },
         // cache: 'no-store',

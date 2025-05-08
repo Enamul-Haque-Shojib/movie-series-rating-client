@@ -21,11 +21,12 @@ export interface IUser {
   }
   
 export interface ITransaction {
-  _id?: string;
-  buyerId: any;
-  sellerId: any;
-  itemId: any;
-  status?: string;
+  id?: string;
+  userId: string;
+  mediaId: string;
+  transactionId: any;
+  price: string;
+  type: string;
 }
 
 

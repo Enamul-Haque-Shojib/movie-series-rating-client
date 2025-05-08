@@ -10,7 +10,7 @@ import React from 'react';
 
 
 const MediaDetails = async ({ params }: any) => {
-  const { mediaId } : any = params;
+  const { mediaId } : any = await params;
 
   console.log('id',mediaId)
 
