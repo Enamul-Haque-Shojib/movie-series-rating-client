@@ -19,9 +19,9 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import CheckoutForm from "@/components/Form/CheckoutForm"
 
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PAYMENT_PUBLISH_KEY);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PAYMENT_PUBLISH_KEY as string);
 
-const PayModal = ({mediaData}) => {
+const PayModal = ({mediaData} : any) => {
    
     const {id, title, image, buy_price, rent_price} = mediaData;
     const [price, setPrice] = useState("0");

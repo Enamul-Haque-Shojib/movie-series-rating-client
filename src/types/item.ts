@@ -45,21 +45,48 @@ export type TMedia={
             genre: string,
             streamingPlatform: string,
             streamingLinks: string,
-            // like: {
-            //   id: string;
-            //   userId: string;
-            //   mediaId: string;
-            // }[];
-            // unlike: {
-            //   id: string;
-            //   userId: string;
-            //   mediaId: string;
-            // }[];
-            // comment: {
-            //   id: string;
-            //   userId: string;
-            //   mediaId: string;
-            //   userComment: string;
-            // }[];
+            like: {
+              id: string;
+              userId: string;
+              mediaId: string;
+            }[];
+            unlike: {
+              id: string;
+              userId: string;
+              mediaId: string;
+            }[];
+            comment: {
+              id: string;
+              userId: string;
+              mediaId: string;
+              userComment: string;
+            }[];
+            review:TReview;
             
 }
+
+
+
+export type TReview ={
+  
+             id: string;
+              userId: IUser;
+              mediaId: TMedia;
+              content: string;
+              rating: number;
+              tags: string[];
+              spoiler: boolean;
+              approved : boolean;
+              published: boolean;
+            reviewLike :{
+               id: string;
+              userId:string;
+              reviewId:  string
+            } [];
+            reviewComment:{
+              id: string;
+              userId:string;
+              reviewId:  string;
+              userComment: string;
+            }[];
+}[]

@@ -51,15 +51,6 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
 
   export const getAllItems = async () => {
     
-    
-    // let url='';
-    // if(condition==='search'){
-    //   url=`https://second-hand-marketplace-server.vercel.app/api/listings?searchTerm=${search}`
-    // }else if(condition === 'category'){
-    //   url=`https://second-hand-marketplace-server.vercel.app/api/listings?category=${search}`
-    // }else{
-    //   url=`https://second-hand-marketplace-server.vercel.app/api/listings`
-    // }
 
     try {
       const res = await fetch(
@@ -78,6 +69,8 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
       return Error(error.message);
     }
   };
+
+  
   export const getUserItems = async () => {
     
   

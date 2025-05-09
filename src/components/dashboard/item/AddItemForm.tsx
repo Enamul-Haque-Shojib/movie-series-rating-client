@@ -80,7 +80,7 @@ const {user} = useUser()
            
         };
 
-    console.log(initialData)
+
 
         try {
             
