@@ -30,7 +30,7 @@ import { addReview } from '@/services/mediaReview';
 const ReviewForm = ({mediaId}:any) => {
        const { user } = useUser();
     const [tags, setTags] = useState<string[]>([]);
-   console.log(tags)
+
     const form = useForm({
       defaultValues: {
         content: '',
@@ -73,12 +73,12 @@ const ReviewForm = ({mediaId}:any) => {
 
   
         const res = await addReview(data)
-        console.log(res);
+        
         form.reset();
         setTags([]);
         setSelectedRating(0);
         if(res.success==true){
-            toast.success('Review added successfully')
+            toast.success('Review added successfully and wait for approve and publish from Admin')
         }else{
             toast.warning('You have already added review this media')
         }

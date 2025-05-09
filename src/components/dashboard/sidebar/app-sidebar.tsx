@@ -31,13 +31,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       Admin: [
         { title: "Dashboard", url: "/dashboard", icon: Gauge, isActive: true, },
         { title: "Media Management", url: `/dashboard/${role1}/listing`, icon: Users },
-        { title: "Listing Management", url: "/dashboard/admin/listing-management", icon: List },
+        { title: "Review Management", url: `/dashboard/${role1}/review-management`, icon: List },
+        { title: "Purchase Management", url: `/dashboard/${role1}/purchase-management`, icon: List },
         { title: "My Profile", url: "/dashboard/admin/profile", icon: User },
       ],
       User: [
         { title: "Dashboard", url: "/dashboard", icon: Gauge, isActive: true, },
-        { title: "Manage Listings", url: "/dashboard/listing", icon: Package },
-        { title: "Track Purchases", url: "/dashboard/purchase-history", icon: Package },
+        { title: "Purchase Media", url: `/dashboard/${role1}/listing`, icon: List },
+        { title: "Review Management", url: `/dashboard/${role1}/review-management`, icon: List },
         { title: "Track Sales", url: "/dashboard/sales-history", icon: Package },
         // { title: "WishList", url: "/dashboard/wishlist", icon: Heart },
         { title: "Profile", url: "/dashboard/profile", icon: User },

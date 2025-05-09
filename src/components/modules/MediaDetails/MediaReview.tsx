@@ -3,9 +3,11 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { getAllReviewByMediaId } from '@/services/mediaReview';
+import { useUser } from '@/context/UserContext';
+import { addReviewLike, getAllReviewByMediaId } from '@/services/mediaReview';
 import { TReview } from '@/types/item';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 
 interface MediaReviewProps {
@@ -13,7 +15,7 @@ interface MediaReviewProps {
 }
 const MediaReview: React.FC<MediaReviewProps>  = ({id}) => {
 
-    
+    const {user} = useUser();
        const [showSpoiler, setShowSpoiler] = useState(false);
 
        const [reviews, setReviews] = useState([])
@@ -29,7 +31,21 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}) => {
               getReviewData();
               
            },[id])
-        // const { id, userId, mediaId, reviewComent, reviewLike, rating, spoiler, content } = review;
+        
+           const handleReviewLike = async(id)=>{
+            try {
+              const res = await addReviewLike({userId:user?.id, reviewId: id})
+          
+           if(res?.success==true){
+            toast.success('Review Like successfully added')
+           }else{
+            toast.warning('You have already like this review')
+           }
+            } catch (error) {
+              toast.error('Something went wrong!')
+            }
+           
+           }
     return (
         <div>
 
@@ -63,11 +79,15 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}) => {
           )}
         </CardContent>
         <div className='flex justify-center items-center space-x-2 text-xl'>
-            <i className="fa-solid fa-heart"></i>
+            <Button variant="outline" className='cursor-pointer'><i className="fa-solid fa-heart"
+            onClick={()=>handleReviewLike(rev.id)}
+            ></i></Button>
             <Dialog>
                   <DialogTrigger asChild>
                   {
-                    <Button variant="outline"><i className="fa-solid fa-comment"></i></Button>
+                    <Button variant="outline" 
+                    className='cursor-pointer' 
+                    ><i className="fa-solid fa-comment"></i></Button>
                   }
                     
                    

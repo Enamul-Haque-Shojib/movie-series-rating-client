@@ -78,15 +78,19 @@ export type TReview ={
               spoiler: boolean;
               approved : boolean;
               published: boolean;
+              user: IUser;
+              media: TMedia;
             reviewLike :{
                id: string;
               userId:string;
               reviewId:  string
             } [];
-            reviewComment:{
-              id: string;
-              userId:string;
-              reviewId:  string;
-              userComment: string;
-            }[];
+            reviewComment:TReviewComment;
+}[];
+
+export type TReviewComment={
+  id: string;
+  userId:string;
+  reviewId:  string;
+  userComment: string;
 }[]

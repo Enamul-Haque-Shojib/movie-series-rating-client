@@ -13,6 +13,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import Comments from './Comments';
 import { getReviewCommentByReviewId } from '@/services/reviewComment';
+import CommentForm from '../Form/CommentForm';
 
 const ReviewComment = ({rev}:any) => {
       const [showSpoiler, setShowSpoiler] = useState(false);
@@ -73,7 +74,7 @@ const ReviewComment = ({rev}:any) => {
          {
         comments.length==0 ? 
         <div><h1>No comments yet</h1></div> : 
-        
+
         <div className="">
         {
         comments.map((comment) => (
@@ -85,7 +86,7 @@ const ReviewComment = ({rev}:any) => {
         
        </ScrollArea>
       
-   
+   <CommentForm reviewId = {rev?.id}></CommentForm>
       
       </DialogContent>
     );

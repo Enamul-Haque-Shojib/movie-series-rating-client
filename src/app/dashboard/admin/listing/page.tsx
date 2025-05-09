@@ -1,7 +1,7 @@
 import ManageItems from "@/components/dashboard/item";
 
 
-const AddItem = () => {
+const Listing = () => {
     
  
     return (
@@ -11,4 +11,4 @@ const AddItem = () => {
     );
 };
 
-export default AddItem;
+export default Listing;

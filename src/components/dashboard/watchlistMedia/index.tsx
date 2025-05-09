@@ -27,33 +27,25 @@ import { useUser } from "@/context/UserContext";
 import { TMedia } from "@/types/item";
 import Link from "next/link";
 
-const ManageItems = () => {
+const ManageWatchList = () => {
   const { user } = useUser();
   const router = useRouter();
   const [items, setItems] = useState<TMedia[]>([]);
 
   useEffect(() => {
     const fetchAllItems = async () => {
-      const res = await getUserItems();
+      const res = await getAllWatchListByUserId();
       setItems(res?.data);
     };
     fetchAllItems();
   }, []);
 
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteItem(id);
-      setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-      toast.success("Product deleted successfully");
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
+
 
   return (
     <div className="container mx-auto px-6 py-8 space-y-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold text-gray-800">All Movies and Series</h1>
+        <h1 className="text-2xl font-semibold text-gray-800">All Movies and Series WatchList</h1>
         <Button
           onClick={() => router.push("/dashboard/admin/listing/add-item")}
           size="sm"
@@ -78,7 +70,7 @@ const ManageItems = () => {
               <TableHead>Platform</TableHead>
              
               <TableHead>Status</TableHead>
-              <TableHead className="text-right">Action</TableHead>
+           
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -109,20 +101,7 @@ const ManageItems = () => {
                   </TableCell>
                
                 <TableCell>{item.status}</TableCell>
-                <TableCell className="text-right flex gap-2 items-center justify-end">
-                  <button
-                    onClick={() => router.push(`/dashboard/admin/listing/update-item/${item.id}`)}
-                    className="text-indigo-600 hover:text-indigo-800 p-2 rounded-md"
-                  >
-                    <Edit className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => item.id && handleDelete(item.id)}
-                    className="text-red-600 hover:text-red-800 p-2 rounded-md"
-                  >
-                    <Trash className="w-5 h-5" />
-                  </button>
-                </TableCell>
+               
               </TableRow>
             ))}
           </TableBody>
@@ -132,5 +111,5 @@ const ManageItems = () => {
   );
 };
 
-export default ManageItems;
+export default ManageWatchList;
 

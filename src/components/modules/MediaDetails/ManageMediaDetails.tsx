@@ -136,10 +136,11 @@ import { useUser } from '@/context/UserContext';
 import { addTransaction } from '@/services/TransactionService';
 import { toast } from 'sonner';
 import { TMedia } from '@/types/item';  // Import the correct type for product
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { Clock, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import MediaReview from "./MediaReview";
 import ReviewForm from "@/components/modal/ReviewForm";
+import { addMediaLike, addMediaUnLike, addWatchlist } from "@/services/itemService";
 
 interface ManageMediaDetailsProps {
   media: TMedia;  // Explicitly type the product prop
@@ -158,18 +159,61 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
     },[media, setIsLoading])
  
 
-  const metadata = {
-    title: "Inception",
-    year: 2010,
-    director: "Christopher Nolan",
-    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
-    posterUrl: "https://image.tmdb.org/t/p/original/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
-    rating: 9,
-    review: "A mind-bending thriller that explores the nature of reality.",
-    spoiler: true,
-    tags: ["classic", "mind-blowing"],
-    likes: 134,
-  };
+  // const metadata = {
+  //   title: "Inception",
+  //   year: 2010,
+  //   director: "Christopher Nolan",
+  //   cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
+  //   posterUrl: "https://image.tmdb.org/t/p/original/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+  //   rating: 9,
+  //   review: "A mind-bending thriller that explores the nature of reality.",
+  //   spoiler: true,
+  //   tags: ["classic", "mind-blowing"],
+  //   likes: 134,
+  // };
+
+  const handleMediaLike = async(id)=>{
+              try {
+                const res = await addMediaLike({userId:user?.id, mediaId: id})
+             
+             if(res?.success==true){
+              toast.success('Media Like successfully added')
+             }else{
+              toast.warning('You have already like this Media')
+             }
+              } catch (error) {
+                toast.error('Something went wrong!')
+              }
+             
+      }
+  const handleMediaUnLike = async(id)=>{
+              try {
+                const res = await addMediaUnLike({userId:user?.id, mediaId: id})
+             
+             if(res?.success==true){
+              toast.success('Media UnLike successfully added')
+             }else{
+              toast.warning('You have already Unlike this Media')
+             }
+              } catch (error) {
+                toast.error('Something went wrong!')
+              }
+             
+      }
+  const handleWatchlist = async(id)=>{
+              try {
+                const res = await addWatchlist({userId:user?.id, mediaId: id})
+             
+             if(res?.success==true){
+              toast.success('Media successfully added in watchlist')
+             }else{
+              toast.warning('You have already added in watchlist')
+             }
+              } catch (error) {
+                toast.error('Something went wrong!')
+              }
+             
+      }
 
     if(isLoading){
     return <p className="text-center text-lg font-medium text-gray-700 dark:text-gray-300">Loading...</p>
@@ -192,10 +236,14 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
           </AspectRatio>
         <div className='w-full flex justify-start items-center'>
           <div className='flex justify-center items-center'>
-            <Button variant="outline"><ThumbsUp></ThumbsUp></Button><span>{like.length}</span>
+            <Button variant="outline"
+            onClick={()=>handleMediaLike(id)}
+            ><ThumbsUp></ThumbsUp></Button><span>{like.length}</span>
             </div>
           <div className='flex justify-center items-center'>
-            <Button variant="outline"><ThumbsDown></ThumbsDown></Button><span>{unlike.length}</span>
+            <Button variant="outline"
+            onClick={()=>handleMediaUnLike(id)}
+            ><ThumbsDown></ThumbsDown></Button><span>{unlike.length}</span>
             </div>
             <div>
               <Dialog>
@@ -207,6 +255,11 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
                   <ReviewForm mediaId={{ id}}></ReviewForm>
                   
                 </Dialog>
+            </div>
+            <div className='flex justify-center items-center'>
+            <Button variant="outline"
+            onClick={()=>handleWatchlist(id)}
+            ><Clock></Clock></Button>
             </div>
         </div>
         </div>

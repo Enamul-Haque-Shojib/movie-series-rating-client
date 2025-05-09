@@ -51,30 +51,28 @@ export const createPayment = async (payload:{id: string}): Promise<any> => {
 
 
 
-export const updateTransaction = async (id: string): Promise<any> => {
-    
-    try {
-      const res = await fetch(`https://second-hand-marketplace-server.vercel.app/api/transactions/update-transaction/${id}`, {
-        method: "PATCH",
-        headers: {
-          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
-        "Content-Type": "application/json",
-        },
-        // cache: 'no-store',
-      });
-      revalidateTag("TRANSACTION");
-      return res.json();
-    } catch (error: any) {
-      return Error(error);
-    }
-  };
-
-
-  export const getAllPurchases = async (userId: string) => {
+  export const getAllPurchases = async () => {
 
     try {
       const res = await fetch(
-        `https://second-hand-marketplace-server.vercel.app/api/transactions/purchase/${userId}`,
+        `http://localhost:3001/api/purchases/all-purchase`,
+        {
+          next: {
+            tags: ["TRANSACTION"],
+          },
+        }
+      );
+      const data = await res.json();
+      return data;
+    } catch (error: any) {
+      return Error(error.message);
+    }
+  };
+  export const getAllPurchasesByUserId = async (userId: string) => {
+
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/purchases/purchase-by-userid/${userId}`,
         {
           next: {
             tags: ["TRANSACTION"],

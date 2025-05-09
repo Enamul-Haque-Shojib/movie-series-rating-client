@@ -103,7 +103,7 @@ const router = useRouter();
       
           toast.success('Payment Successful!')
           
-          router.push(`/dashboard`)
+          router.push(`/dashboard/user/listing`)
         } catch (error) {
           console.log(error)
         } finally {

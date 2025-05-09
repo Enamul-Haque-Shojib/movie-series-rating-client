@@ -19,12 +19,13 @@ export const addReview = async (reviewData: TReview): Promise<any> => {
         },
         // cache: 'no-store'
       });
-      revalidateTag("MEDIA");
+      revalidateTag("REVIEW");
       return res.json();
     } catch (error: any) {
       return Error(error);
     }
   };
+
 
 
   export const getAllReviewByMediaId = async (id: string) => {
@@ -35,7 +36,7 @@ export const addReview = async (reviewData: TReview): Promise<any> => {
         `http://localhost:3001/api/user-action/user-review/${id}`,
         {
           next: {
-            tags: ["MEDIA"],
+            tags: ["REVIEW"],
           },
         }
       );
@@ -45,5 +46,46 @@ export const addReview = async (reviewData: TReview): Promise<any> => {
       return data;
     } catch (error: any) {
       return Error(error.message);
+    }
+  };
+  export const getAllReviews = async () => {
+    
+
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/admin-action/get-review`,
+        {
+          next: {
+            tags: ["REVIEW"],
+          },
+        }
+      );
+      const data = await res.json();
+   
+      
+      return data;
+    } catch (error: any) {
+      return Error(error.message);
+    }
+  };
+
+
+  export const addReviewLike = async (reviewLikeData:{userId: string, reviewId: string}): Promise<any> => {
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/user-action/add-review-like`, {
+        method: "POST",
+        body: JSON.stringify(reviewLikeData),
+      
+        headers: {
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
+        "Content-Type": "application/json",
+        },
+        // cache: 'no-store'
+      });
+      revalidateTag("REVIEW");
+      return res.json();
+    } catch (error: any) {
+      return Error(error);
     }
   };

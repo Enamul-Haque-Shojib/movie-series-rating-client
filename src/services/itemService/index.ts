@@ -125,5 +125,65 @@ export const getSingleMedia = async (mediaId: string) => {
   }
 };
 
+
+export const addMediaLike = async (mediaLikeData:{userId: string, mediaId: string}): Promise<any> => {
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/user-action/add-like`, {
+        method: "POST",
+        body: JSON.stringify(mediaLikeData),
+      
+        headers: {
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
+        "Content-Type": "application/json",
+        },
+        // cache: 'no-store'
+      });
+      revalidateTag("MEDIA");
+      return res.json();
+    } catch (error: any) {
+      return Error(error);
+    }
+  };
+export const addMediaUnLike = async (mediaUnLikeData:{userId: string, mediaId: string}): Promise<any> => {
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/user-action/add-unlike`, {
+        method: "POST",
+        body: JSON.stringify(mediaUnLikeData),
+      
+        headers: {
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
+        "Content-Type": "application/json",
+        },
+        // cache: 'no-store'
+      });
+      revalidateTag("MEDIA");
+      return res.json();
+    } catch (error: any) {
+      return Error(error);
+    }
+  };
+
+export const addWatchlist = async (mediaWatchlistData:{userId: string, mediaId: string}): Promise<any> => {
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/user-action/add-watchlist`, {
+        method: "POST",
+        body: JSON.stringify(mediaWatchlistData),
+      
+        headers: {
+          Authorization: (await cookies()).get("movieSeriesRating_accessToken")!.value,
+        "Content-Type": "application/json",
+        },
+        // cache: 'no-store'
+      });
+      revalidateTag("MEDIA");
+      return res.json();
+    } catch (error: any) {
+      return Error(error);
+    }
+  };
+
 export default deleteItem;
   
