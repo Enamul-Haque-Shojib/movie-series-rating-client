@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useUser } from '@/context/UserContext';
-import { registerUser } from '@/services/AuthService';
+import { registerUser } from '@/services/authService';
 import createImage from '@/services/imageUpload';
 
 

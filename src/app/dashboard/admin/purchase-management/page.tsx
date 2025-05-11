@@ -2,7 +2,7 @@
 import ManagePurchase from '@/components/dashboard/adminPurchase';
 import React from 'react';
 
-const ReviewManagement = () => {
+const PurchaseManagement = () => {
     return (
         <div>
             <ManagePurchase></ManagePurchase>
@@ -10,4 +10,4 @@ const ReviewManagement = () => {
     );
 };
 
-export default ReviewManagement;
+export default PurchaseManagement;

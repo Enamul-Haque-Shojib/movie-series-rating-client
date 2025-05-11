@@ -3,7 +3,7 @@
 
 
 import { useUser } from "@/context/UserContext";
-import { logout } from "@/services/AuthService";
+import { logout } from "@/services/authService";
 
 import { Menu,X } from "lucide-react";
 import Image from "next/image";

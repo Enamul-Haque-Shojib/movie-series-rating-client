@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { TReviewComment } from "@/types/item";
@@ -7,7 +8,7 @@ import { cookies } from "next/headers";
 export const addReviewComment = async (commentData: TReviewComment): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/user-action/add-review-comment`, {
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/user-action/add-review-comment`, {
         method: "POST",
         body: JSON.stringify(commentData),
       
@@ -29,7 +30,7 @@ export const addReviewComment = async (commentData: TReviewComment): Promise<any
 
     try {
       const res = await fetch(
-        `http://localhost:3001/api/user-action/get-review-comment/${id}`,
+        `${process.env.NEXT_SERVER_URL}/api/user-action/get-review-comment/${id}`,
         {
           next: {
             tags: ["MEDIA"],

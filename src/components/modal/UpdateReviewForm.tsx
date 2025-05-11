@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button"
 import {
 
@@ -26,14 +26,20 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from '@/components/ui/input';
-import { addReview } from '@/services/mediaReview';
+import { updateReview } from '@/services/mediaReview';
 import { TReviewPayload } from '@/types/item';
 import { useRouter } from 'next/navigation';
 
-const ReviewForm = ({mediaId}:any) => {
+
+
+const UpdateReviewForm = ({mediaId, reviewId}:any) => {
   const router = useRouter();
        const { user } = useUser();
+
+   
+          const [loading, setLoading] = useState<boolean>(true);
     const [tags, setTags] = useState<string[]>([]);
+     const [selectedRating, setSelectedRating] = useState(0);
 
     const form = useForm<TReviewPayload>({
   defaultValues: {
@@ -44,8 +50,40 @@ const ReviewForm = ({mediaId}:any) => {
   },
 });
 
+   useEffect(() => {
+        const fetchItem = async () => {
+            try {
+                const res = await fetch(`http://localhost:3001/api/user-action/user/one-review/${reviewId}`);
+                
+                if (!res.ok) throw new Error("Failed to fetch item");
+                const data = await res.json();
+                const reviewData = data.data;
+             
 
-    const [selectedRating, setSelectedRating] = useState(0); // State for rating
+                form.reset({
+                    content: reviewData.content,
+                    rating: reviewData.rating,
+                    tags: reviewData.tags,
+                    spoiler: reviewData.spoiler,
+                    userId: reviewData.userId,
+                    mediaId: reviewData.mediaId,
+                });
+
+        
+                setTags(reviewData.tags);
+                setSelectedRating(reviewData.rating)
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchItem();
+    }, [form, reviewId]);
+
+
+    // State for rating
   
     const handleStarClick = (rating:any) => {
       setSelectedRating(rating);
@@ -68,8 +106,9 @@ const ReviewForm = ({mediaId}:any) => {
     };
   
 const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  console.log(user?.id, mediaId)
   try {
-    if (!user?.id || !mediaId?.id) {
+    if (!user?.id || !mediaId) {
     toast.error("User or media ID is missing");
     return;
   }
@@ -81,8 +120,9 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
       userId: user?.id,
       mediaId: mediaId.id,
     };
-
-    const res = await addReview(payload);
+ console.log(payload)
+    const res = await updateReview(payload, reviewId);
+   console.log(res)
 
     form.reset();
     setTags([]);
@@ -90,9 +130,9 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
     if (res.success === true) {
        router.push(`/dashboard/user/review-management`)
-      toast.success('Review added successfully and wait for approval and publish from Admin');
+      toast.success('Review updated successfully');
     } else {
-      toast.warning('You have already added a review for this media');
+      toast.warning('Review could not be updated');
     }
   } catch (error) {
     console.error('Error review:', error);
@@ -100,13 +140,14 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
   }
 };
 
+  if (loading) return <p className="text-center text-gray-500">Loading Item details...</p>
 
     return (
         
           <DialogContent className="sm:max-w-[500px]">
       <DialogHeader>
-        <DialogTitle>Review</DialogTitle>
-        <DialogDescription>Review the Media.</DialogDescription>
+        <DialogTitle>Update Review</DialogTitle>
+        <DialogDescription>Update the review.</DialogDescription>
       </DialogHeader>
       <div className="">
         <Form {...form}>
@@ -202,4 +243,4 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     );
 };
 
-export default ReviewForm;
+export default UpdateReviewForm;

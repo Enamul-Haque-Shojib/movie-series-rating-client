@@ -1,23 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button"
 import {
-  Dialog,
+ 
   DialogContent,
   DialogDescription,
-  DialogFooter,
+
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import Comments from './Comments';
 import { getReviewCommentByReviewId } from '@/services/reviewComment';
 import CommentForm from '../Form/CommentForm';
+import { TReviewComment } from '@/types/item';
 
 const ReviewComment = ({rev}:any) => {
       const [showSpoiler, setShowSpoiler] = useState(false);
-       const [comments, setComments] = useState([])
+       const [comments, setComments] = useState<TReviewComment[]>([]);
+
       
       
              useEffect(()=>{
@@ -78,7 +81,7 @@ const ReviewComment = ({rev}:any) => {
         <div className="">
         {
         comments.map((comment) => (
-          <Comments key={comment.id}  comment = {comment} />
+          <Comments key={comment?.id}  comment = {comment} />
          ))
          }
       </div>

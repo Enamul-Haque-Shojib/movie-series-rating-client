@@ -3,6 +3,8 @@
 
 "use client";
 
+import { useUser } from "@/context/UserContext";
+
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -16,24 +18,27 @@ import {
 
 import Image from "next/image";
 import { TReview } from "@/types/item";
-import { getAllReviews, reviewApproved, reviewDeletedByAdmin, reviewPublished, reviewUnPublished } from "@/services/mediaReview";
+import { getAllReviewsByUserId, reviewDeletedByUser } from "@/services/mediaReview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import UpdateReviewForm from "@/components/modal/UpdateReviewForm";
 import { toast } from "sonner";
 
 
-const ManageReview = () => {
- 
-  const [reviews, setReviews] = useState<TReview[]>([]); 
+const ManageUserReview = () => {
+  const { user } = useUser();
+  const [reviews, setReviews] = useState<TReview[]>([]); // 🔹 Fix: Define Type
 
   useEffect(() => {
    
 
     const getAllReviewData = async () => {
       try {
-        const res = await getAllReviews();
-    
+        if (!user?.id) return; 
+        const res = await getAllReviewsByUserId(user?.id);
+        console.log(res)
         setReviews(res?.data || []); // Ensure it doesn't set `undefined`
       } catch (error) {
         console.log(error);
@@ -41,51 +46,12 @@ const ManageReview = () => {
     };
 
     getAllReviewData();
-  }, []);
+  }, [user?.id]);
 
-  const handleApproved =async(id:string)=>{
+    const handleDelete =async(id:string)=>{
     try {
-      const res = await reviewApproved(id);
+      const res = await reviewDeletedByUser(id);
       console.log(res)
-      if(res.success==true){
-        toast.success('Review approved successfully')
-      }else{
-        toast.warning('Review could not be approved')
-      }
-    } catch (error) {
-      toast.error('Something went wrong!')
-    }
-  }
-  const handlePublished =async(id:string)=>{
-    try {
-      const res = await reviewPublished(id);
-      console.log(res)
-      if(res.success==true){
-        toast.success('Review published successfully')
-      }else{
-        toast.warning('Review could not be published')
-      }
-    } catch (error) {
-      toast.error('Something went wrong!')
-    }
-  }
-  const handleUnpublished =async(id:string)=>{
-    try {
-      const res = await reviewUnPublished(id);
-      console.log(res)
-      if(res.success==true){
-        toast.success('Review unpublished successfully')
-      }else{
-        toast.warning('Review could not be unpublished')
-      }
-    } catch (error) {
-      toast.error('Something went wrong!')
-    }
-  }
-  const handleDeleted =async(id:string)=>{
-    try {
-      const res = await reviewDeletedByAdmin(id);
- 
       if(res.success==true){
         toast.success('Review deleted successfully')
       }else{
@@ -108,14 +74,14 @@ const ManageReview = () => {
           <TableHeader>
             <TableRow>
               <TableHead className="">Media</TableHead>
-              <TableHead>User</TableHead>
+        
               <TableHead>Content</TableHead>
               <TableHead>Tags</TableHead>
               <TableHead>Spoiler</TableHead>
+              <TableHead>Rating</TableHead>
               <TableHead>Approved</TableHead>
               <TableHead>Publish</TableHead>
               <TableHead>Action</TableHead>
-              <TableHead>Delete</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -137,27 +103,6 @@ const ManageReview = () => {
                     <span className="font-medium text-gray-800">{rev?.media?.title}</span>
                   </div>
                 </TableCell>
-
-              
-                <TableCell>
-                  <div className="flex items-center justify-start gap-3">
-                   
-                      {rev?.user?.photoUrl && (
-                        <Image
-                          src={rev?.user?.photoUrl}
-                          alt="user Image"
-                          width={50}
-                          height={50}
-                          className="rounded-full object-cover"
-                        />
-                      )}
-                  
-                    <div>
-                      <h2 className="font-semibold text-gray-700">{rev?.user?.name}</h2>
-                   
-                    </div>
-                  </div>
-                </TableCell>
                  <TableCell>
                  {rev?.content}
                 </TableCell>
@@ -171,6 +116,7 @@ const ManageReview = () => {
                   rev?.spoiler==true ? 'Yes' : "No"
                  }
                 </TableCell>
+                <TableCell>{rev.rating}</TableCell>
                  <TableCell>
                  {
                   rev?.approved==true ? 'Approved' : "Pending"
@@ -182,36 +128,28 @@ const ManageReview = () => {
                  }
                 </TableCell>
                  <TableCell>
-                 
                 <div className="flex">
+
                   {
-                    rev.isDeleted==false?<>
-                    
-                    {
-                    rev.approved==false && 
-                    <Button variant='outline' onClick={()=>handleApproved(rev?.id as string)}>Approved</Button>
-                  }
-                  {
-                    rev.published==false ?  (rev.approved==true ? 
-                    <Button variant='outline' onClick={()=>handlePublished(rev?.id as string)}>Published</Button>:<></>) 
-                    :
-                     <Button variant='outline' onClick={()=>handleUnpublished(rev?.id as string)}>UnPublished</Button>
-                  }
-                    </> : <p className="bg-red-600 text-white flex justify-center items-center p-2 rounded-2xl">User deleted the review</p>
-                  }
+                    rev?.published==false ? <>
+                    <Dialog>
+                  <DialogTrigger asChild>
+                  
+                     <Button variant='outline'><Edit></Edit></Button>
+                  
+                  </DialogTrigger>
+                  <UpdateReviewForm mediaId={rev?.mediaId} reviewId={rev.id}></UpdateReviewForm>
+                  
+                </Dialog>
+
+                    <Button variant='outline' className="text-red-600" onClick={()=>handleDelete(rev?.id as string)}><Trash></Trash></Button>
                   
                   
-                  
+                    </> :
+                    <p className="bg-orange-600 text-white flex justify-center items-center p-2 rounded-2xl">Published the review</p>
+                  }
+                 
                 </div>
-                </TableCell>
-                <TableCell>
-                  {
-                    <Button 
-                    variant='outline' 
-                    className="text-red-600"
-                    onClick={()=>handleDeleted(rev?.id as string)}
-                    ><Trash></Trash></Button>
-                  }
                 </TableCell>
               </TableRow>
             ))}
@@ -222,5 +160,5 @@ const ManageReview = () => {
   );
 };
 
-export default ManageReview;
+export default ManageUserReview;
 

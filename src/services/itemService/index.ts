@@ -3,14 +3,14 @@
 
 "use server";
 
-import { TMedia } from "@/types/item";
+import { TInputMedia } from "@/types/item";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-export const addItem = async (itemData: TMedia): Promise<any> => {
+export const addItem = async (itemData: TInputMedia): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/medias/add`, {
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/medias/add`, {
         method: "POST",
         body: JSON.stringify(itemData),
       
@@ -29,10 +29,10 @@ export const addItem = async (itemData: TMedia): Promise<any> => {
 
 
 
-export const updateItem = async (itemData: TMedia, id: string): Promise<any> => {
+export const updateItem = async (itemData: TInputMedia, id: string): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/medias/update/${id}`, {
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/medias/update/${id}`, {
         method: "PATCH",
         body: JSON.stringify(itemData),
       
@@ -49,12 +49,41 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
     }
   };
 
-  export const getAllItems = async () => {
+  // export const getAllItems = async () => {
     
+
+  //   try {
+  //     const res = await fetch(
+  //       'http://localhost:3001/api/medias',
+  //       {
+  //         next: {
+  //           tags: ["MEDIA"],
+  //         },
+  //       }
+  //     );
+  //     const data = await res.json();
+   
+      
+  //     return data;
+  //   } catch (error: any) {
+  //     return Error(error.message);
+  //   }
+  // };
+
+    export const getAllItems = async (condition: string, search:string) => {
+    
+    let url='';
+    if(condition==='search'){
+      url=`${process.env.NEXT_SERVER_URL}/api/medias?searchTerm=${search}`
+    }else if(condition === 'category'){
+      url=`${process.env.NEXT_SERVER_URL}/api/medias?genre=${search}`
+    }else{
+      url=`${process.env.NEXT_SERVER_URL}/api/medias`
+    }
 
     try {
       const res = await fetch(
-        'http://localhost:3001/api/medias',
+        url,
         {
           next: {
             tags: ["MEDIA"],
@@ -62,7 +91,6 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
         }
       );
       const data = await res.json();
-   
       
       return data;
     } catch (error: any) {
@@ -77,7 +105,7 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
 
     try {
       const res = await fetch(
-        `http://localhost:3001/api/medias`,
+        `${process.env.NEXT_SERVER_URL}/api/medias`,
         {
           next: {
             tags: ["MEDIA"],
@@ -92,8 +120,8 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
     }
   };
 
-  const deleteItem = async(id: string) => {
-    const res = await fetch(`https://second-hand-marketplace-server.vercel.app/api/listings/delete-listing/${id}`,
+ export const deleteItem = async(id: string) => {
+    const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/medias/delete-media/${id}`,
         {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json'},
@@ -111,7 +139,24 @@ export const updateItem = async (itemData: TMedia, id: string): Promise<any> => 
 export const getSingleMedia = async (mediaId: string) => {
   try {
     const res = await fetch(
-      `http://localhost:3001/api/medias/one-media/${mediaId}`,
+      `${process.env.NEXT_SERVER_URL}/api/medias/one-media/${mediaId}`,
+      {
+        next: {
+          tags: ["MEDIA"],
+        },
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+
+export const getAllWatchlistByUserId = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_SERVER_URL}/api/user-action/user-watchlist/${id}`,
       {
         next: {
           tags: ["MEDIA"],
@@ -129,7 +174,7 @@ export const getSingleMedia = async (mediaId: string) => {
 export const addMediaLike = async (mediaLikeData:{userId: string, mediaId: string}): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/user-action/add-like`, {
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/user-action/add-like`, {
         method: "POST",
         body: JSON.stringify(mediaLikeData),
       
@@ -148,7 +193,7 @@ export const addMediaLike = async (mediaLikeData:{userId: string, mediaId: strin
 export const addMediaUnLike = async (mediaUnLikeData:{userId: string, mediaId: string}): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/user-action/add-unlike`, {
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/user-action/add-unlike`, {
         method: "POST",
         body: JSON.stringify(mediaUnLikeData),
       
@@ -168,7 +213,7 @@ export const addMediaUnLike = async (mediaUnLikeData:{userId: string, mediaId: s
 export const addWatchlist = async (mediaWatchlistData:{userId: string, mediaId: string}): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/user-action/add-watchlist`, {
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/user-action/add-watchlist`, {
         method: "POST",
         body: JSON.stringify(mediaWatchlistData),
       
@@ -185,5 +230,5 @@ export const addWatchlist = async (mediaWatchlistData:{userId: string, mediaId: 
     }
   };
 
-export default deleteItem;
+
   

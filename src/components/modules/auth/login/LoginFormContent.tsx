@@ -11,7 +11,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
-import { loginUser } from '@/services/AuthService';
+import { loginUser } from '@/services/authService';
 
 
 const LoginFormContent = () => {

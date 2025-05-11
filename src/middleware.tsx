@@ -4,6 +4,8 @@ import { getCurrentUser } from "./services/authService";
 
 
 
+
+
 const authRoutes = ["/login", "/register"];
 
 
@@ -20,7 +22,7 @@ export const middleware = async (request: NextRequest) => {
     } else {
       return NextResponse.redirect(
         new URL(
-          `http://localhost:3000/login?redirectPath=${pathname}`,
+          `${process.env.NEXT_SERVER_URL}/api/login?redirectPath=${pathname}`,
           request.url
         )
       );

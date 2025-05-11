@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 export const addTransaction = async (transactionData: ITransaction): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/purchases/add-purchase`, 
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/purchases/add-purchase`, 
 
         {
         method: "POST",
@@ -30,7 +30,7 @@ export const addTransaction = async (transactionData: ITransaction): Promise<any
 export const createPayment = async (payload:{id: string}): Promise<any> => {
     
     try {
-      const res = await fetch(`http://localhost:3001/api/purchases/create-payment`, 
+      const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/purchases/create-payment`, 
 
         {
         method: "POST",
@@ -55,7 +55,7 @@ export const createPayment = async (payload:{id: string}): Promise<any> => {
 
     try {
       const res = await fetch(
-        `http://localhost:3001/api/purchases/all-purchase`,
+        `${process.env.NEXT_SERVER_URL}/api/purchases/all-purchase`,
         {
           next: {
             tags: ["TRANSACTION"],
@@ -72,7 +72,7 @@ export const createPayment = async (payload:{id: string}): Promise<any> => {
 
     try {
       const res = await fetch(
-        `http://localhost:3001/api/purchases/purchase-by-userid/${userId}`,
+        `${process.env.NEXT_SERVER_URL}/api/purchases/purchase-by-userid/${userId}`,
         {
           next: {
             tags: ["TRANSACTION"],

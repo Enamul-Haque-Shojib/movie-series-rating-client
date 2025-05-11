@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button"
+
 import {
-  Dialog,
+  
   DialogContent,
   DialogDescription,
-  DialogFooter,
+  
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+ 
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label"
 import {Elements} from '@stripe/react-stripe-js';
@@ -23,7 +24,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PAYMENT_PUBLISH_KEY as 
 
 const PayModal = ({mediaData} : any) => {
    
-    const {id, title, image, buy_price, rent_price} = mediaData;
+    const {title, image} = mediaData;
     const [price, setPrice] = useState("0");
     
     return (

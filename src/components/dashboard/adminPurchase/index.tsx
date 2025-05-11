@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 
 
 "use client";
 
-import { Button } from "@/components/ui/button";
+
 import React, { useEffect, useState } from "react";
-import { Edit, Plus, Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
+
 import {
   Table,
   TableBody,
@@ -21,17 +20,17 @@ import {
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-import deleteItem, { getUserItems } from "@/services/itemService";
-import { toast } from "sonner";
+
+
 import { useUser } from "@/context/UserContext";
-import { TMedia } from "@/types/item";
+import { TPurchase } from "@/types/item";
 import Link from "next/link";
 import { getAllPurchases} from "@/services/TransactionService";
 
 const ManagePurchase = () => {
   const { user } = useUser();
-  const router = useRouter();
-  const [items, setItems] = useState<TMedia[]>([]);
+
+ const [items, setItems] = useState<TPurchase[]>([]);
 console.log(items)
   useEffect(() => {
     const fetchAllPurchases = async () => {

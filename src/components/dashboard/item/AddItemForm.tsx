@@ -25,8 +25,8 @@ import {
     SelectValue,
   } from "@/components/ui/select";
 import { toast } from 'sonner';
-import { useUser } from '@/context/UserContext';
-import { TMedia } from '@/types/item';
+
+import { TInputMedia } from '@/types/item';
 
 // import { CategoriesFilter } from '@/constant';
 
@@ -37,7 +37,7 @@ const AddItemForm = () => {
     // const {data: session} = useSession();
     //     const email = session?.user?.email || "";
 
-const {user} = useUser()
+
     const [imagePreview, setImagePreview] = useState<string | null>(null);
    
 
@@ -65,20 +65,21 @@ const {user} = useUser()
         const imageFile = data.image?.[0];
         const image = await createImage(imageFile);
 
-        const initialData:TMedia= {
-            title: data.title,
-            image,
-            director: data.director,
-            description: data.description,
-            synopsis: data.synopsis,
-            year: data.year,
-            buy_price: data.buy_price,
-            rent_price: data.rent_price,
-            status: data.status,
-            genre: data.genre,
-            streamingPlatform: data. streamingPlatform
-           
-        };
+       const initialData: TInputMedia = {
+  title: data.title,
+  image,
+  director: data.director,
+  description: data.description,
+  synopsis: data.synopsis,
+  year: data.year,
+  buy_price: data.buy_price,
+  rent_price: data.rent_price,
+  status: data.status,
+  genre: data.genre,
+  streamingPlatform: data.streamingPlatform,
+};
+
+
 
 
 
@@ -87,11 +88,16 @@ const {user} = useUser()
            const res = await addItem(initialData);
            
             
-            //  form.reset();
-             toast.success(res.message);
-            // toast({ title: "Success", description: "Project added successfully!" });
+             form.reset();
+             if(res.success==true){
+              toast.success(res.message);
+             }else{
+              toast.warning(res.message);
+             }
+             
+           
         } catch (error:any) {
-            // toast({ variant: "destructive", title: "Error", description: "Failed to add project." });
+            
             console.error('Error submitting form:', error);
             toast.error(error.message);
         }

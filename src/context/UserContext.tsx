@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import { getCurrentUser, logout, verifyUserFromDB } from "@/services/AuthService";
+import { getCurrentUser, logout, verifyUserFromDB } from "@/services/authService";
 import { IUser } from "@/types/item";
 
 
@@ -27,7 +27,7 @@ const UserContext = createContext<IUserProviderValues | undefined>(undefined);
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
-  console.log(user)
+  
   const [isLoading, setIsLoading] = useState(true);
   const [medias, setMedias] = useState<any[]>([]);
 

@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import { getNewToken } from "@/services/AuthService";
+
+
+import { getNewToken } from "@/services/authService";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
@@ -20,12 +23,12 @@ export const isTokenExpired = async (token: string): Promise<boolean> => {
 export const getValidToken = async (): Promise<string> => {
   const cookieStore = await cookies();
 
-  let token = cookieStore.get("accessToken")!.value;
+  let token = cookieStore.get("movieSeriesRating_accessToken")!.value;
 
   if (!token || (await isTokenExpired(token))) {
     const { data } = await getNewToken();
     token = data?.accessToken;
-    cookieStore.set("accessToken", token);
+    cookieStore.set("movieSeriesRating_accessToken", token);
   }
 
   return token;

@@ -21,7 +21,7 @@ import { useUser } from "@/context/UserContext";
 
 import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/contant";
-import { logout } from "@/services/AuthService";
+import { logout } from "@/services/authService";
 
 // import { protectedRoutes } from "@/contants";
 

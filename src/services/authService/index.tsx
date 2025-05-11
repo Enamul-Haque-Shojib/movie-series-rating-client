@@ -7,7 +7,7 @@ import { FieldValues } from "react-hook-form";
 
 export const registerUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/auths/register`, {
+    const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/auths/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,27 +26,11 @@ export const registerUser = async (userData: FieldValues) => {
     return Error(error);
   }
 };
-export const updateUser = async (userData: FieldValues, id: string) => {
-  try {
-    const res = await fetch(`https://second-hand-marketplace-server.vercel.app/api/auth/update-auth/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-    const result = await res.json();
 
-
-    return result;
-  } catch (error: any) {
-    return Error(error);
-  }
-};
 
 export const loginUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/auths/login`, {
+    const res = await fetch(`${process.env.NEXT_SERVER_URL}/api/auths/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +55,7 @@ export const verifyUserFromDB = async (email:string) => {
 
   try {
     const res = await fetch(
-      `http://localhost:3001/api/auths/one-auth/${email}`);
+      `${process.env.NEXT_SERVER_URL}/api/auths/one-auth/${email}`);
     const data = await res.json();
     return data;
   } catch (error: any) {
@@ -103,7 +87,7 @@ export const logout = async () => {
 export const getNewToken = async () => {
   try {
     const res = await fetch(
-      `https://second-hand-marketplace-server.vercel.app/api/auth/refresh-token`,
+      `${process.env.NEXT_SERVER_URL}/api/auth/refresh-token`,
       {
         method: "POST",
         headers: {
@@ -119,38 +103,7 @@ export const getNewToken = async () => {
   }
 };
 
-export const getAllFeedbacks = async () => {
-
-  try {
-    const res = await fetch(
-      `https://second-hand-marketplace-server.vercel.app/api/auth/feedback`,
-      {
-        next: {
-          tags: ["PRODUCT"],
-        },
-      }
-    );
-    const data = await res.json();
-    return data;
-  } catch (error: any) {
-    return Error(error.message);
-  }
-};
 
 
-export const getStatistics = async (userId: string) => {
-  try {
-    const res = await fetch(
-      `https://second-hand-marketplace-server.vercel.app/api/auth/dashboard-auth/${userId}`,
-      {
-        next: {
-          tags: ["PRODUCT"],
-        },
-      }
-    );
-    const data = await res.json();
-    return data;
-  } catch (error: any) {
-    return Error(error.message);
-  }
-};
+
+

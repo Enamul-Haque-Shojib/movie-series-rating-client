@@ -16,7 +16,7 @@ import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import Link from "next/link";
 // import Logo from "@/assets/svgs/Logo";
-import { User, Package,Gauge, Users, List } from "lucide-react";
+import { Gauge, Users, List } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 
 
@@ -33,15 +33,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         { title: "Media Management", url: `/dashboard/${role1}/listing`, icon: Users },
         { title: "Review Management", url: `/dashboard/${role1}/review-management`, icon: List },
         { title: "Purchase Management", url: `/dashboard/${role1}/purchase-management`, icon: List },
-        { title: "My Profile", url: "/dashboard/admin/profile", icon: User },
+        { title: "Pick Management", url: `/dashboard/${role1}/pick-management`, icon: List },
+       
       ],
       User: [
         { title: "Dashboard", url: "/dashboard", icon: Gauge, isActive: true, },
         { title: "Purchase Media", url: `/dashboard/${role1}/listing`, icon: List },
         { title: "Review Management", url: `/dashboard/${role1}/review-management`, icon: List },
-        { title: "Track Sales", url: "/dashboard/sales-history", icon: Package },
-        // { title: "WishList", url: "/dashboard/wishlist", icon: Heart },
-        { title: "Profile", url: "/dashboard/profile", icon: User },
+        { title: "Watch List", url: `/dashboard/${role1}/watchlist`, icon: List },
+       
       ],
    
 };

@@ -2,20 +2,20 @@
 
 "use client";
 
-import { getAllItems } from '@/services/itemService';
+
 import React from 'react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem,FormMessage } from '@/components/ui/form';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useUser } from '@/context/UserContext';
 import Media from './Media';
 
 const AllMedias = () => {   
-  const { medias, setMedias } = useUser();
+  const { medias} = useUser();
 
-  
+  console.log(medias)
 
   const form = useForm({
     defaultValues: {

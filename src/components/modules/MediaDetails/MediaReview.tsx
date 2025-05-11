@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ReviewComment from '@/components/modal/ReviewComment';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -13,12 +15,12 @@ import { toast } from 'sonner';
 interface MediaReviewProps {
   id:string;  // Explicitly type the product prop
 }
-const MediaReview: React.FC<MediaReviewProps>  = ({id}) => {
+const MediaReview: React.FC<MediaReviewProps>  = ({id}:any) => {
 
     const {user} = useUser();
        const [showSpoiler, setShowSpoiler] = useState(false);
 
-       const [reviews, setReviews] = useState([])
+       const [reviews, setReviews] = useState<TReview[]>([])
 
 
        useEffect(()=>{
@@ -32,7 +34,11 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}) => {
               
            },[id])
         
-           const handleReviewLike = async(id)=>{
+           const handleReviewLike = async(id : string)=>{
+              if (!user?.id) {
+    toast.error("User ID is missing");
+    return;
+  }
             try {
               const res = await addReviewLike({userId:user?.id, reviewId: id})
           
@@ -80,7 +86,7 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}) => {
         </CardContent>
         <div className='flex justify-center items-center space-x-2 text-xl'>
             <Button variant="outline" className='cursor-pointer'><i className="fa-solid fa-heart"
-            onClick={()=>handleReviewLike(rev.id)}
+            onClick={()=>handleReviewLike(rev.id as string)}
             ></i></Button>
             <Dialog>
                   <DialogTrigger asChild>

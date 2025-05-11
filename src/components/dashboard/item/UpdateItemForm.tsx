@@ -27,7 +27,7 @@ import { updateItem } from "@/services/itemService";
 import createImage from "@/services/imageUpload";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@/context/UserContext";
-import { TMedia } from "@/types/item";
+import { TInputMedia } from "@/types/item";
 
 
 const UpdateItemForm = () => {
@@ -109,26 +109,32 @@ const UpdateItemForm = () => {
 
     
      if (!user?.id) return;
-        const updatedItem : TMedia = {
-          title: data.title,
-          image,
-          director: data.director,
-          description: data.description,
-          synopsis: data.synopsis,
-          year: data.year,
-          buy_price: data.buy_price,
-          rent_price: data.rent_price,
-          status: data.status,
-          genre: data.genre,
-            streamingPlatform: data. streamingPlatform
-        };
+       const updatedItem: TInputMedia = {
+  title: data.title,
+  image,
+  director: data.director,
+  description: data.description,
+  synopsis: data.synopsis,
+  year: data.year,
+  buy_price: data.buy_price,
+  rent_price: data.rent_price,
+  status: data.status,
+  genre: data.genre,
+  streamingPlatform: data.streamingPlatform,
+};
+
 
        
 
         try {
             const res = await updateItem(updatedItem, params?.itemId);
             router.push('/dashboard/admin/listing')
-            toast.success(res.message);
+              if(res.success==true){
+                          toast.success(res.message);
+                         }else{
+                          toast.warning(res.message);
+                         }
+                         
         } catch (error:any) {
             console.error("Error submitting form:", error);
            toast.error(error.message);
