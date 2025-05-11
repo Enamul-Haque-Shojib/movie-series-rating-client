@@ -15,7 +15,7 @@ const ManageHomePage = () => {
   return (
     <div>
       <Banner />
-
+      
       <Features />
       <QuickAccess></QuickAccess>
       <Feedback />

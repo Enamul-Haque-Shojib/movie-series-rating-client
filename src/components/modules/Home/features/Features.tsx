@@ -4,6 +4,9 @@ import {
   CardContent,
 
 } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import HighestRatedMovie from "./HighestRatedMovie";
+import HighestRatedSeries from "./HighestRatedSeries";
 
 
 const Features = () => {
@@ -13,17 +16,27 @@ const Features = () => {
   ];
   return (
     <div className="lg:w-[85%] w-[95%] mx-auto my-12">
-        <h2 className="text-2xl font-semibold mb-4">Featured</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-           {featured.map((item, i) => (
-             <Card key={i} className="rounded-2xl shadow">
-               <CardContent className="p-4">
-                 <h3 className="text-lg font-bold">{item.title}</h3>
-                 <p>Rating: {item.rating}</p>
-               </CardContent>
-             </Card>
-           ))}
-         </div>
+        <h2 className="text-2xl font-semibold mb-4">Featured : Highest Rated Movie and Series</h2>
+          <Tabs defaultValue="movies">
+        <TabsList className="flex gap-4">
+          <TabsTrigger value="movies">Movies</TabsTrigger>
+          <TabsTrigger value="series">Series</TabsTrigger>
+      
+          
+        </TabsList>
+
+        <TabsContent value="movies">
+          <HighestRatedMovie></HighestRatedMovie>
+        </TabsContent>
+
+        <TabsContent value="series">
+          <HighestRatedSeries></HighestRatedSeries>
+        </TabsContent>
+       
+  
+
+      </Tabs>
+       
     </div>
   );
 };

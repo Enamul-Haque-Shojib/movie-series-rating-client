@@ -24,9 +24,7 @@ const QuickAccess = () => {
         <TabsContent value="newly-added">
           <NewlyAdded></NewlyAdded>
         </TabsContent>
-        <TabsContent value="newly-added">
-          <NewlyAdded></NewlyAdded>
-        </TabsContent>
+       
         <TabsContent value="editor-picked">
           <EditorPicked></EditorPicked>
         </TabsContent>
