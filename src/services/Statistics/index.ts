@@ -23,6 +23,42 @@ export const getTopRatedMedia = async () => {
       return Error(error.message);
     }
   };
+export const getHighestRatedMovies = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_SERVER_URL}/api/statistics/highest-rated-movie`,
+        {
+          next: {
+            tags: ["MEDIA"],
+          },
+        }
+      );
+      const data = await res.json();
+   
+      
+      return data;
+    } catch (error: any) {
+      return Error(error.message);
+    }
+  };
+export const getHighestRatedSeries = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_SERVER_URL}/api/statistics/highest-rated-series`,
+        {
+          next: {
+            tags: ["MEDIA"],
+          },
+        }
+      );
+      const data = await res.json();
+   
+      
+      return data;
+    } catch (error: any) {
+      return Error(error.message);
+    }
+  };
 
 
 export const getNewlyAddedMedia = async () => {
@@ -49,6 +85,42 @@ export const getEditorPickedMedia = async () => {
     try {
       const res = await fetch(
         `${process.env.NEXT_SERVER_URL}/api/statistics/editor-picked`,
+        {
+          next: {
+            tags: ["MEDIA"],
+          },
+        }
+      );
+      const data = await res.json();
+   
+      
+      return data;
+    } catch (error: any) {
+      return Error(error.message);
+    }
+  };
+export const getTotalMediaStatisticsForUser = async (id: string) => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_SERVER_URL}/api/statistics/total-media-user/${id}`,
+        {
+          next: {
+            tags: ["MEDIA"],
+          },
+        }
+      );
+      const data = await res.json();
+   
+      
+      return data;
+    } catch (error: any) {
+      return Error(error.message);
+    }
+  };
+export const getTotalMediaStatisticsForAdmin = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_SERVER_URL}/api/statistics/total-media-admin`,
         {
           next: {
             tags: ["MEDIA"],

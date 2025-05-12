@@ -4,17 +4,23 @@
 
 import { useUser } from "@/context/UserContext";
 import React from "react";
+import AdminDashboard from "./AdminDashboard";
+import UserDashboard from "./UserDashboard";
 
 
 
 
 const ManageDashboard = () => {
 
-const {user} = useUser()
+const {user} = useUser();
+
   return (
     <div className="container mx-auto px-6 py-8 space-y-8">
       {
-        user?.role==="ADMIN" ? <h1>Welcome to Admin Dashboard</h1> : <h1>Welcome to User Dashboard</h1>
+        user?.role==="ADMIN" ?
+         <AdminDashboard></AdminDashboard>
+          : 
+          <UserDashboard></UserDashboard>
       }
     </div>
   );

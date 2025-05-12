@@ -1,15 +1,17 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { getHighestRatedMovies } from '@/services/Statistics';
 import { TMedia } from '@/types/item';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+
 
 const HighestRatedMovie = () => {
        const [featured, setFeatured] = useState<TMedia[]>([]);
         useEffect(()=>{
             const getData = async()=>{
-                const res = await getHighestRatedMedia();
-                
+                const res = await getHighestRatedMovies();
+                console.log(res)
                 setFeatured(res?.data)
             }
             getData();

@@ -51,8 +51,9 @@ const ManageUserReview = () => {
     const handleDelete =async(id:string)=>{
     try {
       const res = await reviewDeletedByUser(id);
-      console.log(res)
+   
       if(res.success==true){
+         setReviews((prevItems) => prevItems.filter((item) => item.id !== id));
         toast.success('Review deleted successfully')
       }else{
         toast.warning('Review could not be deleted')

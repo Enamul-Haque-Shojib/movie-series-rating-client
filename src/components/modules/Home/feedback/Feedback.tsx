@@ -63,12 +63,9 @@ const feedbackData = [
 const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState<FeedbackType[]>([]);
 
-   
-
     useEffect(() => {
         setFeedbacks(feedbackData);
   
-
     },[])
 
   return (

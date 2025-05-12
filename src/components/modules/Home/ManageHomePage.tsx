@@ -7,6 +7,7 @@ import Features from "./features/Features";
 import Feedback from "./feedback/Feedback";
 
 import QuickAccess from "./quickAccess.tsx/QuickAccess";
+import StatsMedia from "./stats/StatsMedia";
 
 const ManageHomePage = () => {
 
@@ -15,7 +16,7 @@ const ManageHomePage = () => {
   return (
     <div>
       <Banner />
-      
+      <StatsMedia></StatsMedia>
       <Features />
       <QuickAccess></QuickAccess>
       <Feedback />

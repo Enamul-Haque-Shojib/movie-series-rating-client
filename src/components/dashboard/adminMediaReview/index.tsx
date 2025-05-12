@@ -27,6 +27,9 @@ const ManageReview = () => {
  
   const [reviews, setReviews] = useState<TReview[]>([]); 
 
+
+  // how can i use 'useState' for 'approved' and 'published' for real changing ?
+
   useEffect(() => {
    
 
@@ -43,50 +46,107 @@ const ManageReview = () => {
     getAllReviewData();
   }, []);
 
-  const handleApproved =async(id:string)=>{
-    try {
-      const res = await reviewApproved(id);
-      console.log(res)
-      if(res.success==true){
-        toast.success('Review approved successfully')
-      }else{
-        toast.warning('Review could not be approved')
-      }
-    } catch (error) {
-      toast.error('Something went wrong!')
+  // const handleApproved =async(id:string)=>{
+  //   try {
+  //     const res = await reviewApproved(id);
+  //     console.log(res)
+  //     if(res.success==true){
+  //       toast.success('Review approved successfully')
+  //     }else{
+  //       toast.warning('Review could not be approved')
+  //     }
+  //   } catch (error) {
+  //     toast.error('Something went wrong!')
+  //   }
+  // }
+
+  const handleApproved = async (id: string) => {
+  try {
+    const res = await reviewApproved(id);
+    if (res.success === true) {
+      setReviews(prev =>
+        prev.map(review =>
+          review.id === id ? { ...review, approved: true } : review
+        )
+      );
+      toast.success("Review approved successfully");
+    } else {
+      toast.warning("Review could not be approved");
     }
+  } catch (error) {
+    toast.error("Something went wrong!");
   }
-  const handlePublished =async(id:string)=>{
-    try {
-      const res = await reviewPublished(id);
-      console.log(res)
-      if(res.success==true){
-        toast.success('Review published successfully')
-      }else{
-        toast.warning('Review could not be published')
-      }
-    } catch (error) {
-      toast.error('Something went wrong!')
+};
+  // const handlePublished =async(id:string)=>{
+  //   try {
+  //     const res = await reviewPublished(id);
+      
+  //     if(res.success==true){
+  //       toast.success('Review published successfully')
+  //     }else{
+  //       toast.warning('Review could not be published')
+  //     }
+  //   } catch (error) {
+  //     toast.error('Something went wrong!')
+  //   }
+  // }
+
+  const handlePublished = async (id: string) => {
+  try {
+    const res = await reviewPublished(id);
+    if (res.success === true) {
+      setReviews(prev =>
+        prev.map(review =>
+          review.id === id ? { ...review, published: true } : review
+        )
+      );
+      toast.success("Review published successfully");
+    } else {
+      toast.warning("Review could not be published");
     }
+  } catch (error) {
+    toast.error("Something went wrong!");
   }
-  const handleUnpublished =async(id:string)=>{
-    try {
-      const res = await reviewUnPublished(id);
-      console.log(res)
-      if(res.success==true){
-        toast.success('Review unpublished successfully')
-      }else{
-        toast.warning('Review could not be unpublished')
-      }
-    } catch (error) {
-      toast.error('Something went wrong!')
+};
+
+  // const handleUnpublished =async(id:string)=>{
+  //   try {
+  //     const res = await reviewUnPublished(id);
+     
+  //     if(res.success==true){
+  //       toast.success('Review unpublished successfully')
+  //     }else{
+  //       toast.warning('Review could not be unpublished')
+  //     }
+  //   } catch (error) {
+  //     toast.error('Something went wrong!')
+  //   }
+  // }
+
+  const handleUnpublished = async (id: string) => {
+  try {
+    const res = await reviewUnPublished(id);
+    if (res.success === true) {
+      setReviews(prev =>
+        prev.map(review =>
+          review.id === id ? { ...review, published: false } : review
+        )
+      );
+      toast.success("Review unpublished successfully");
+    } else {
+      toast.warning("Review could not be unpublished");
     }
+  } catch (error) {
+    toast.error("Something went wrong!");
   }
+};
+
   const handleDeleted =async(id:string)=>{
     try {
       const res = await reviewDeletedByAdmin(id);
  
       if(res.success==true){
+        setReviews((prevItems) => prevItems.filter((item) => item.id !== id));
         toast.success('Review deleted successfully')
       }else{
         toast.warning('Review could not be deleted')

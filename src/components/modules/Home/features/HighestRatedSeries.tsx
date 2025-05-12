@@ -1,5 +1,6 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { getHighestRatedSeries } from '@/services/Statistics';
 import { TMedia } from '@/types/item';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -9,7 +10,7 @@ const HighestRatedSeries = () => {
         useEffect(()=>{
             const getData = async()=>{
                 const res = await getHighestRatedSeries();
-                
+                console.log(res)
                 setFeatured(res?.data)
             }
             getData();
