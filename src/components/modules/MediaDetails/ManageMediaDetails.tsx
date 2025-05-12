@@ -28,7 +28,7 @@ import { useUser } from '@/context/UserContext';
 
 import { toast } from 'sonner';
 import { TMedia } from '@/types/item';  // Import the correct type for product
-import { Clock, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { Clock, MessageSquare, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import MediaReview from "./MediaReview";
 import ReviewForm from "@/components/modal/ReviewForm";
@@ -43,7 +43,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
   
 
     
-    const { id, title, description, synopsis, director, image, status, buy_price, rent_price, year, like, unlike} = media;
+    const { id, title, description, synopsis, director, image, status, buy_price, rent_price, year, like, unlike, genre, streamingPlatform} = media;
     // const [statusItem, setStatusItem] = useState(status)
     useEffect(() => {
       if(media) setIsLoading(false);
@@ -54,7 +54,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
 
   const handleMediaLike = async(id:string)=>{
     if (!user?.id) {
-    toast.error("User ID is missing");
+    toast.error("Please Sign up or login");
     return;
   }
               try {
@@ -72,7 +72,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
       }
   const handleMediaUnLike = async(id:string)=>{
       if (!user?.id) {
-    toast.error("User ID is missing");
+    toast.error("Please Sign up or login");
     return;
   }
               try {
@@ -128,12 +128,12 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
           </AspectRatio>
         <div className='w-full flex justify-start items-center'>
           <div className='flex justify-center items-center'>
-            <Button variant="outline"
+            <Button variant="outline" className="cursor-pointer"
             onClick={()=>handleMediaLike(id as string)}
             ><ThumbsUp></ThumbsUp></Button><span>{like.length}</span>
             </div>
           <div className='flex justify-center items-center'>
-            <Button variant="outline"
+            <Button variant="outline" className="cursor-pointer"
             onClick={()=>handleMediaUnLike(id as string)}
             ><ThumbsDown></ThumbsDown></Button><span>{unlike.length}</span>
             </div>
@@ -141,7 +141,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
               <Dialog>
                   <DialogTrigger asChild>
                   {
-                    <Button variant="outline">Review +</Button>
+                    user && <Button className="cursor-pointer" variant="outline"><MessageSquare></MessageSquare>Add Review +</Button>
                   }
                   </DialogTrigger>
                   <ReviewForm mediaId={{ id}}></ReviewForm>
@@ -149,9 +149,12 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
                 </Dialog>
             </div>
             <div className='flex justify-center items-center'>
-            <Button variant="outline"
+              {
+                user && <Button variant="outline" className="cursor-pointer"
             onClick={()=>handleWatchlist(id as string)}
-            ><Clock></Clock></Button>
+            ><Clock></Clock>Add WatchList +</Button>
+              }
+            
             </div>
         </div>
         </div>
@@ -165,6 +168,8 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
             <p className="text-muted-foreground">
             {year} • Directed by {director}
           </p>
+            <p><span className="font-semibold">Platform: </span> {streamingPlatform}</p>
+            <p><span className="font-semibold">Genre: </span> {genre}</p>
             <p><span className="font-semibold">Buy Price: </span> ${buy_price}</p>
             <p><span className="font-semibold">Rent Price: </span> ${rent_price}</p>
             <p className="font-semibold">Status:{status}</p>
@@ -173,7 +178,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
               <Dialog>
                   <DialogTrigger asChild>
                   {
-                    <Button variant="outline">Buy / Rent</Button>
+                    user && <Button variant="outline">Buy / Rent</Button>
                   }
                     
                    

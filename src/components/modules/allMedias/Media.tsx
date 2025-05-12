@@ -25,7 +25,7 @@ interface MediaProps {
 }
 
 const Media: React.FC<MediaProps> = ({ media }) => {
-  const { id, title, image } = media;
+  const { id, title, image, genre, status, rating, director  } = media;
 
   return (
     <Card className="w-full lg:w-[320px] sm:w-[350px] bg-white shadow-md rounded-lg overflow-hidden">
@@ -43,10 +43,11 @@ const Media: React.FC<MediaProps> = ({ media }) => {
         </CardTitle>
       </CardHeader>
       <CardContent className=" text-gray-600 text-sm ">
-        {/* <p><span className="font-semibold">Category:</span> {category}</p>
-        <p><span className="font-semibold">Condition:</span> {condition}</p>
-        <p><span className="font-semibold">Price:</span> ${price}</p> */}
-        
+        <p><span className="font-semibold">Genre:</span> {genre}</p>
+        <p><span className="font-semibold">Director:</span> {director}</p>
+        <p><span className="font-semibold">rating:</span> {rating}</p>
+        <p><span className="font-semibold"></span> {status}</p>
+         
       </CardContent>
       <CardFooter className="flex justify-end">
         <div className="flex justify-between items-center w-full">

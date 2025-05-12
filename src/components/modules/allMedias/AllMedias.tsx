@@ -35,7 +35,7 @@ const AllMedias = () => {
 
   return (
     <div className='container mx-auto px-4 my-12'>
-      <h1 className='text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-8'>All Products</h1>
+      <h1 className='text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-8'>All Medias</h1>
       <div className='bg-white dark:bg-gray-900 rounded-lg'>
         <Form {...form}>
           <form 
@@ -48,7 +48,7 @@ const AllMedias = () => {
                 <FormItem className='w-full sm:w-auto flex-1'>
                   
                   <FormControl>
-                    <Input type='text' placeholder='Search products...' required {...field} className='rounded-lg border-gray-300 dark:border-gray-700' />
+                    <Input type='text' placeholder='Search movie or series...' required {...field} className='rounded-lg border-gray-300 dark:border-gray-700' />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
