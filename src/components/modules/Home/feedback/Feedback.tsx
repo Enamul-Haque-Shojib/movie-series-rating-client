@@ -28,7 +28,7 @@ const feedbackData = [
     },
     {
         id:'2',
-        feedbackUserPhoto:'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+        feedbackUserPhoto:'https://t4.ftcdn.net/jpg/05/31/37/89/360_F_531378938_xwRjN9e5ramdPj2coDwHrwk9QHckVa5Y.jpg',
         name: 'David Smith',
         lifeStyle:'Frequent Traveler',
 

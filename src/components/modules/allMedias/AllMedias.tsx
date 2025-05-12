@@ -15,7 +15,7 @@ import Media from './Media';
 const AllMedias = () => {   
   const { medias} = useUser();
 
-  console.log(medias)
+console.log(medias)
 
   const form = useForm({
     defaultValues: {

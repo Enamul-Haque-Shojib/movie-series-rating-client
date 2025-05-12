@@ -70,7 +70,7 @@ const ReviewForm = ({mediaId}:any) => {
 const onSubmit: SubmitHandler<FieldValues> = async (data) => {
   try {
     if (!user?.id || !mediaId?.id) {
-    toast.error("User or media ID is missing");
+    toast.error("UnAuthorized or Media missing");
     return;
   }
     const payload: TReviewPayload = {

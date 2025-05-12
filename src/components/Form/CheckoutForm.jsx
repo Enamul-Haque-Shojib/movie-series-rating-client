@@ -31,7 +31,7 @@ const router = useRouter();
         const fetchPayment = async()=>{
             const res = await createPayment({id})
             setClientSecret(res?.data?.clientSecret)
-            console.log(res.data.clientSecret);
+            
         }
         fetchPayment();
     },[createPayment, id])
@@ -98,7 +98,7 @@ const router = useRouter();
             type: mediaType,
             transactionId: paymentIntent?.id,
           });
-          console.log(res)
+          
           
       
           toast.success('Payment Successful!')
@@ -134,7 +134,7 @@ const router = useRouter();
         />
         
         <div className='flex justify-around mt-2 gap-2'>
-        <Button className='btn bg-green-500 p-5 rounded-lg text-xl cursor-pointer'
+        <Button className='btn bg-green-600 p-5 rounded-lg text-xl cursor-pointer'
         
           disabled={!stripe || !clientSecret || processing || price==="0"}
           type='submit'
@@ -142,7 +142,7 @@ const router = useRouter();
         >
           
           {
-            processing ? <Loader className="animate-spin text-gray-400 w-20 h-10" />:
+            processing ? <Loader className="animate-spin text-black text-3xl w-100 h-50"></Loader>:
           `Pay ${price=='0' ? '0' : price=='buy' ? buy_price : rent_price}$`}
           </Button>
         

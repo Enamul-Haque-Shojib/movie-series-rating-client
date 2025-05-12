@@ -109,19 +109,7 @@ const ManageReview = () => {
   }
 };
 
-  // const handleUnpublished =async(id:string)=>{
-  //   try {
-  //     const res = await reviewUnPublished(id);
-     
-  //     if(res.success==true){
-  //       toast.success('Review unpublished successfully')
-  //     }else{
-  //       toast.warning('Review could not be unpublished')
-  //     }
-  //   } catch (error) {
-  //     toast.error('Something went wrong!')
-  //   }
-  // }
+
 
   const handleUnpublished = async (id: string) => {
   try {

@@ -22,7 +22,7 @@ export const middleware = async (request: NextRequest) => {
     } else {
       return NextResponse.redirect(
         new URL(
-          `${process.env.NEXT_SERVER_URL}/api/login?redirectPath=${pathname}`,
+          `https://movie-series-rating-server.vercel.app/api/login?redirectPath=${pathname}`,
           request.url
         )
       );

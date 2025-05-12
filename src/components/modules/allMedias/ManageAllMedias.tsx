@@ -18,7 +18,7 @@ const ManageAllMedias = () => {
 
         const getItemData = async()=>{
             const res = await getAllItems('','');
-            console.log(res)
+         
             setMedias(res?.data);
         }
        getItemData();
@@ -26,7 +26,7 @@ const ManageAllMedias = () => {
     },[setMedias])
 
     const handleCategories = async(category:string)=>{
-        console.log(category)
+        
         try {
             let cat;
             let con;

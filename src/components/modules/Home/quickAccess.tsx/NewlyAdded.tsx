@@ -15,7 +15,7 @@ const NewlyAdded = () => {
             const getData = async()=>{
                 const res = await getNewlyAddedMedia();
                 
-                setNewlyAdded(res?.data)
+                setNewlyAdded(res?.data || [])
             }
             getData();
         },[])

@@ -105,6 +105,7 @@ const pieChartSeries = adminMediaData
         
         
          <div className="border col-span-1 md:col-span-2 lg:col-span-3 flex justify-around p-4">
+      
           <div className="text-center">
             <h4 className="text-xl font-bold">{adminMediaData?.totalMovies}</h4>
             <p className="text-gray-500">Total Movie</p>

@@ -36,7 +36,7 @@ const LoginFormContent = () => {
 
 
       const res = await loginUser(initialData);
-console.log(res)
+
       form.reset();
       setIsLoading(true);
       setUser(res?.data?.user);

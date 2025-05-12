@@ -24,21 +24,25 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 
 import { TWatchList } from "@/types/item";
-import Link from "next/link";
+
 import { useUser } from "@/context/UserContext";
 import { getAllWatchlistByUserId } from "@/services/itemService";
+import { toast } from "sonner";
 
 const ManageWatchList = () => {
   const { user } = useUser();
-  console.log(user?.id)
+
 
   const [items, setItems] = useState<TWatchList[]>([]);
 
   useEffect(() => {
     const fetchAllItems = async () => {
-      if (!user?.id) return; 
+      if (!user?.id){
+        toast.error('Please sign up or login')
+        return
+      }; 
       const res = await getAllWatchlistByUserId(user?.id);
-      console.log(res)
+  
       setItems(res?.data);
     };
     fetchAllItems();
@@ -64,7 +68,6 @@ const ManageWatchList = () => {
               <TableHead>BuyPrice</TableHead>
               <TableHead>RentPrice</TableHead>
               <TableHead>Genre</TableHead>
-              <TableHead>Platform</TableHead>
              
               <TableHead>Status</TableHead>
            
@@ -89,13 +92,7 @@ const ManageWatchList = () => {
                 <TableCell>{item?.media?.buy_price}</TableCell>
                 <TableCell>{item?.media?.rent_price}</TableCell>
                 <TableCell>{item?.media?.genre}</TableCell>
-                <TableCell>
-                  <div>
-                    <Link href={item?.media?.streamingLinks}>{item?.media?.streamingPlatform}</Link>
-                    <p className="text-sm font-light">Click here to watch</p>  
-                  </div>
-                  
-                  </TableCell>
+                
                
                 <TableCell>{item?.media?.status}</TableCell>
                

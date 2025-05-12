@@ -40,7 +40,7 @@ const PayModal = ({mediaData} : any) => {
     </AspectRatio>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
-            Pay Media 
+            Please buy or rent the media to watch  
           </DialogDescription>
         </DialogHeader>
 

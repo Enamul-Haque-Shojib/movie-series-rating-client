@@ -256,6 +256,8 @@ const AddItemForm = () => {
                      
                       <SelectItem value='Drama'> Drama</SelectItem>
                       <SelectItem value='Comedy'>Comedy</SelectItem>
+                      <SelectItem value='Crime'>Crime</SelectItem>
+                      <SelectItem value='Superhero'>Superhero</SelectItem>
                       <SelectItem value='Action'>Action</SelectItem>
                       <SelectItem value='Horror'> Horror</SelectItem>
                       <SelectItem value='Thriller'>Thriller </SelectItem>
@@ -296,9 +298,11 @@ const AddItemForm = () => {
                       <SelectItem value='netflix'> Netflix</SelectItem>
                       <SelectItem value='amazon_prime_video'>Amazon Prime Video</SelectItem>
                       <SelectItem value='disney+'>Disney+</SelectItem>
-                      <SelectItem value='hbo_max'>HBO Max</SelectItem>
+                      <SelectItem value='hbo'>HBO</SelectItem>
                       <SelectItem value='apple_tv'>Apple TV</SelectItem>
                       <SelectItem value='peacock'>Peacock</SelectItem>
+                      <SelectItem value='paramount'>Paramount+</SelectItem>
+                      <SelectItem value='hulu'>Hulu</SelectItem>
                     
                     </SelectGroup>
                   </SelectContent>

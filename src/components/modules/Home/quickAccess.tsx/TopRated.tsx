@@ -14,7 +14,7 @@ const TopRated = () => {
         const getData = async()=>{
             const res = await getTopRatedMedia();
             
-            setTopRated(res?.data)
+            setTopRated(res?.data || [])
         }
         getData();
     },[])

@@ -53,7 +53,7 @@ const UpdateReviewForm = ({mediaId, reviewId}:any) => {
    useEffect(() => {
         const fetchItem = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/api/user-action/user/one-review/${reviewId}`);
+                const res = await fetch(`https://movie-series-rating-server.vercel.app/api/user-action/user/one-review/${reviewId}`);
                 
                 if (!res.ok) throw new Error("Failed to fetch item");
                 const data = await res.json();
@@ -106,10 +106,10 @@ const UpdateReviewForm = ({mediaId, reviewId}:any) => {
     };
   
 const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-  console.log(user?.id, mediaId)
+
   try {
     if (!user?.id || !mediaId) {
-    toast.error("User or media ID is missing");
+    toast.error("UnAuthorized or Media missing");
     return;
   }
     const payload: TReviewPayload = {
@@ -120,9 +120,9 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
       userId: user?.id,
       mediaId: mediaId.id,
     };
- console.log(payload)
+ 
     const res = await updateReview(payload, reviewId);
-   console.log(res)
+
 
     form.reset();
     setTags([]);

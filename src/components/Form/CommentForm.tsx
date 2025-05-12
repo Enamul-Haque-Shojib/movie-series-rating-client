@@ -123,12 +123,20 @@ import {
 } from '@/components/ui/form';
 import { Textarea } from "@/components/ui/textarea";
 import { addReviewComment } from '@/services/reviewComment';
+import { TReviewComment } from '@/types/item';
 
 type CommentFormInputs = {
   userComment: string;
 };
 
-const CommentForm = ({ reviewId }: { reviewId: string }) => {
+// const CommentForm = ({ reviewId }: { reviewId: string }) => {
+const CommentForm = ({
+  reviewId,
+  onCommentAdded,
+}: {
+  reviewId: string;
+  onCommentAdded: (comment: TReviewComment) => void;
+}) => {
   const { user } = useUser();
 
   const form = useForm<CommentFormInputs>({
@@ -137,33 +145,68 @@ const CommentForm = ({ reviewId }: { reviewId: string }) => {
     },
   });
 
+  // const onSubmit: SubmitHandler<CommentFormInputs> = async (data) => {
+  //   if (!user?.id || !reviewId) {
+  //     toast.warning('Missing user or review ID');
+  //     return;
+  //   }
+
+  //   const payload = {
+  //     id: '', // or omit if backend handles it
+  //     userId: user.id,
+  //     reviewId: reviewId,
+  //     userComment: data.userComment,
+  //   };
+
+  //   try {
+  //     const res = await addReviewComment(payload);
+  //     form.reset();
+
+  //     if (res.success === true) {
+  //       toast.success('Comment added successfully');
+  //     } else {
+  //       toast.warning('Comment could not be added');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error review:', error);
+  //     toast.error('Something went wrong');
+  //   }
+  // };
+
+
   const onSubmit: SubmitHandler<CommentFormInputs> = async (data) => {
-    if (!user?.id || !reviewId) {
-      toast.warning('Missing user or review ID');
-      return;
-    }
+  if (!user?.id || !reviewId) {
+   toast.error("UnAuthorized or Media missing");
+    return;
+  }
 
-    const payload = {
-      id: '', // or omit if backend handles it
-      userId: user.id,
-      reviewId: reviewId,
-      userComment: data.userComment,
-    };
-
-    try {
-      const res = await addReviewComment(payload);
-      form.reset();
-
-      if (res.success === true) {
-        toast.success('Comment added successfully');
-      } else {
-        toast.warning('Comment could not be added');
-      }
-    } catch (error) {
-      console.error('Error review:', error);
-      toast.error('Something went wrong');
-    }
+  const payload = {
+    id: '', // or omit if your backend creates the ID
+    userId: user.id,
+    reviewId: reviewId,
+    userComment: data.userComment,
   };
+
+  try {
+    const res = await addReviewComment(payload);
+    form.reset();
+
+    if (res.success === true) {
+      toast.success('Comment added successfully');
+
+      // 💡 Add new comment to local state
+      if (res.data) {
+        onCommentAdded(res?.data);
+      }
+    } else {
+      toast.warning('Comment could not be added');
+    }
+  } catch (error) {
+    console.error('Error review:', error);
+    toast.error('Something went wrong');
+  }
+};
+
 
   return (
     <div>

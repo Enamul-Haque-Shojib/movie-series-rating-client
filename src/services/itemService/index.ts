@@ -49,26 +49,7 @@ export const updateItem = async (itemData: TInputMedia, id: string): Promise<any
     }
   };
 
-  // export const getAllItems = async () => {
-    
 
-  //   try {
-  //     const res = await fetch(
-  //       'http://localhost:3001/api/medias',
-  //       {
-  //         next: {
-  //           tags: ["MEDIA"],
-  //         },
-  //       }
-  //     );
-  //     const data = await res.json();
-   
-      
-  //     return data;
-  //   } catch (error: any) {
-  //     return Error(error.message);
-  //   }
-  // };
 
     export const getAllItems = async (condition: string, search:string) => {
     

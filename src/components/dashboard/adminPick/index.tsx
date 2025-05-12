@@ -43,24 +43,58 @@ const ManagePicks = () => {
     fetchAllItems();
   }, []);
 
+  // const handleAddPicked = async (id: string) => {
+  //   try {
+  //     const res = await addEditorPickedByAdmin(id);
+   
+  //     toast.success("Media picked added successfully");
+  //   } catch (error: any) {
+  //     toast.error(error.message);
+  //   }
+  // };
+  // const handleRemovePicked = async (id: string) => {
+  //   try {
+  //     const res = await removeEditorPickedByAdmin(id);
+  //  console.log(res)
+  //     toast.success("Media picked removed successfully");
+  //   } catch (error: any) {
+  //     toast.error(error.message);
+  //   }
+  // };
+
+
   const handleAddPicked = async (id: string) => {
-    try {
-      const res = await addEditorPickedByAdmin(id);
-   console.log(res)
-      toast.success("Media picked added successfully");
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
-  const handleRemovePicked = async (id: string) => {
-    try {
-      const res = await removeEditorPickedByAdmin(id);
-   console.log(res)
-      toast.success("Media picked removed successfully");
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
+  try {
+    await addEditorPickedByAdmin(id);
+    toast.success("Media picked added successfully");
+
+    // Update local state
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, isEditorsPick: true } : item
+      )
+    );
+  } catch (error: any) {
+    toast.error(error.message);
+  }
+};
+
+const handleRemovePicked = async (id: string) => {
+  try {
+    await removeEditorPickedByAdmin(id);
+    toast.success("Media picked removed successfully");
+
+    // Update local state
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, isEditorsPick: false } : item
+      )
+    );
+  } catch (error: any) {
+    toast.error(error.message);
+  }
+};
+
 
   return (
     <div className="container mx-auto px-6 py-8 space-y-8">

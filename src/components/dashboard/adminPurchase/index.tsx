@@ -31,7 +31,7 @@ const ManagePurchase = () => {
   const { user } = useUser();
 
  const [items, setItems] = useState<TPurchase[]>([]);
-console.log(items)
+
   useEffect(() => {
     const fetchAllPurchases = async () => {
       const res = await getAllPurchases();

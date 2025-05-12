@@ -12,8 +12,8 @@ const HighestRatedSeries = () => {
         useEffect(()=>{
             const getData = async()=>{
                 const res = await getHighestRatedSeries();
-                console.log(res)
-                setFeatured(res?.data)
+                
+                setFeatured(res?.data || [])
             }
             getData();
         },[])

@@ -13,8 +13,8 @@ const HighestRatedMovie = () => {
         useEffect(()=>{
             const getData = async()=>{
                 const res = await getHighestRatedMovies();
-                console.log(res)
-                setFeatured(res?.data)
+             
+                setFeatured(res?.data || [])
             }
             getData();
         },[])

@@ -74,6 +74,7 @@ const Navbar = () => {
               }
               
               <div className="relative">
+                
                  {user?.photoUrl && (
                              <Image
                             src={user?.photoUrl}
@@ -155,12 +156,12 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/all-products"
+              href="/all-medias"
               className="block text-lg hover:text-indigo-500"
               
               onClick={handleNavField}
             >
-              All Products
+              All Medias
             </Link>
             
             {user ? (

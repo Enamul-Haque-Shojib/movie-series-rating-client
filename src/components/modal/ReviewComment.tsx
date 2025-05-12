@@ -43,6 +43,7 @@ const ReviewComment = ({rev}:any) => {
             Review Comment 
           </DialogDescription>
         </DialogHeader>
+         
           <div>
         <div className="p-4 space-y-3">
           <div className="flex items-center justify-between">
@@ -73,7 +74,7 @@ const ReviewComment = ({rev}:any) => {
        
       </div> 
      
-       <ScrollArea className={comments.length!=0 ?`h-72 w-full rounded-md border`: `h-0 w-full rounded-md border` }>
+      <ScrollArea className={comments.length!=0 ?`h-72 w-full rounded-md border`: `h-0 w-full rounded-md border` }>
          {
         comments.length==0 ? 
         <div><h1>No comments yet</h1></div> : 
@@ -89,7 +90,9 @@ const ReviewComment = ({rev}:any) => {
         
        </ScrollArea>
       
-   <CommentForm reviewId = {rev?.id}></CommentForm>
+   {/* <CommentForm reviewId = {rev?.id}></CommentForm> */}
+   <CommentForm reviewId={rev?.id} onCommentAdded={(newComment) => setComments((prev) => [newComment, ...prev])} />
+
       
       </DialogContent>
     );

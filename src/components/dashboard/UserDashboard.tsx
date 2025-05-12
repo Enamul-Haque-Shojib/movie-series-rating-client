@@ -12,6 +12,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from 'next/image';
 import { getTotalMediaStatisticsForUser } from '@/services/Statistics';
+import { toast } from 'sonner';
 
 const UserDashboard = () => {
 const {user} = useUser();
@@ -28,7 +29,10 @@ const [userMediaData, setUserMediaData] = useState<{
 
   useEffect(() => {
     const fetchAllItems = async () => {
-      if (!user?.id) return; 
+      if (!user?.id){
+        toast.error('Please sign up or login')
+        return
+      };  
       const res = await getTotalMediaStatisticsForUser(user?.id);
       
       setUserMediaData(res?.data);

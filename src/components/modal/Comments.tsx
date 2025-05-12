@@ -4,10 +4,10 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
 const Comments = ({comment}:any) => {
-    console.log(comment)
+    
      return (
         <div>
-            <Card className="group w-full h-full transition-transform transform hover:scale-101 shadow-lg hover:shadow-xl bg-gradient-to-br rounded-xl overflow-hidden">
+            <Card className="group w-full h-full transition-transform transform hover:scale-101 bg-gradient-to-br rounded-sm overflow-hidden">
       <CardHeader className="p-6">
         <div className="flex justify-between items-start mb-4">
           <div className="flex items-center">

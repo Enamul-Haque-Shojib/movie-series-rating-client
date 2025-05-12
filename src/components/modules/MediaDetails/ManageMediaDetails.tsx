@@ -141,7 +141,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
               <Dialog>
                   <DialogTrigger asChild>
                   {
-                    user && <Button className="cursor-pointer" variant="outline"><MessageSquare></MessageSquare>Add Review +</Button>
+                    (user && user.role==='USER') && <Button className="cursor-pointer" variant="outline"><MessageSquare></MessageSquare>Add Review +</Button>
                   }
                   </DialogTrigger>
                   <ReviewForm mediaId={{ id}}></ReviewForm>
@@ -150,7 +150,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
             </div>
             <div className='flex justify-center items-center'>
               {
-                user && <Button variant="outline" className="cursor-pointer"
+                (user && user.role==='USER') && <Button variant="outline" className="cursor-pointer"
             onClick={()=>handleWatchlist(id as string)}
             ><Clock></Clock>Add WatchList +</Button>
               }
@@ -178,7 +178,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
               <Dialog>
                   <DialogTrigger asChild>
                   {
-                    user && <Button variant="outline">Buy / Rent</Button>
+                    (user && user.role==='USER') && <Button variant="outline">Buy / Rent</Button>
                   }
                     
                    
@@ -202,10 +202,7 @@ const ManageMediaDetails: React.FC<ManageMediaDetailsProps> = ({ media }) => {
 
       <MediaReview id = {id as string}></MediaReview>
 
-      <div>
-        <h2 className="text-xl font-semibold mb-2">Comments</h2>
-        <div className="text-muted-foreground">No comments yet. Be the first to comment.</div>
-      </div>
+      
     </div>
     </div>
    

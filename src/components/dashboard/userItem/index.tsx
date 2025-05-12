@@ -26,6 +26,7 @@ import { useUser } from "@/context/UserContext";
 import { TPurchase } from "@/types/item";
 import Link from "next/link";
 import { getAllPurchasesByUserId } from "@/services/TransactionService";
+import { toast } from "sonner";
 
 const ManageUsersItems = () => {
   const { user } = useUser();
@@ -34,7 +35,10 @@ const ManageUsersItems = () => {
 
   useEffect(() => {
   const fetchAllPurchases = async () => {
-    if (!user?.id) return; 
+    if (!user?.id){
+        toast.error('Please sign up or login')
+        return
+      }; 
     const res = await getAllPurchasesByUserId(user.id);
     setItems(res?.data);
   };

@@ -36,9 +36,12 @@ const ManageUserReview = () => {
 
     const getAllReviewData = async () => {
       try {
-        if (!user?.id) return; 
+        if (!user?.id){
+          toast.error('Please Sign up or login')
+          return
+        }; 
         const res = await getAllReviewsByUserId(user?.id);
-        console.log(res)
+ 
         setReviews(res?.data || []); // Ensure it doesn't set `undefined`
       } catch (error) {
         console.log(error);

@@ -13,8 +13,8 @@ const EditorPicked = () => {
           useEffect(()=>{
               const getData = async()=>{
                   const res = await getEditorPickedMedia();
-                  console.log(res?.data);
-                  setEditorPicks(res?.data)
+                
+                  setEditorPicks(res?.data || [])
               }
               getData();
           },[])

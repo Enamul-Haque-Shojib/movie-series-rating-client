@@ -62,7 +62,9 @@ const UpdateItemForm = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/api/medias/one-media/${params?.itemId}`);
+                const res = await fetch(
+                  // `${process.env.NEXT_SERVER_URL}/api/medias/one-media/${params?.itemId}`);
+                  `https://movie-series-rating-server.vercel.app/api/medias/one-media/${params?.itemId}`);
                 if (!res.ok) throw new Error("Failed to fetch item");
                 const data = await res.json();
                 const item = data.data;
@@ -108,7 +110,10 @@ const UpdateItemForm = () => {
         }
 
     
-     if (!user?.id) return;
+     if (!user?.id){
+             toast.error('Please sign up or login')
+             return
+           }; 
        const updatedItem: TInputMedia = {
   title: data.title,
   image,
@@ -298,15 +303,17 @@ const UpdateItemForm = () => {
                                                        <SelectGroup>
                                                          <SelectLabel>Media Genre</SelectLabel>
                                                         
-                                                         <SelectItem value='Drama'> Drama</SelectItem>
-                                                         <SelectItem value='Comedy'>Comedy</SelectItem>
-                                                         <SelectItem value='Action'>Action</SelectItem>
-                                                         <SelectItem value='Horror'> Horror</SelectItem>
-                                                         <SelectItem value='Thriller'>Thriller </SelectItem>
-                                                         <SelectItem value='Sci-Fi'>Sci-Fi</SelectItem>
-                                                         <SelectItem value='Romance'>Romance</SelectItem>
-                                                         <SelectItem value='Fantasy'>Fantasy</SelectItem>
-                                                         <SelectItem value='Historical'> Historical</SelectItem>
+                                                          <SelectItem value='Drama'> Drama</SelectItem>
+                                                                               <SelectItem value='Comedy'>Comedy</SelectItem>
+                                                                               <SelectItem value='Crime'>Crime</SelectItem>
+                                                                               <SelectItem value='Superhero'>Superhero</SelectItem>
+                                                                               <SelectItem value='Action'>Action</SelectItem>
+                                                                               <SelectItem value='Horror'> Horror</SelectItem>
+                                                                               <SelectItem value='Thriller'>Thriller </SelectItem>
+                                                                               <SelectItem value='Sci-Fi'>Sci-Fi</SelectItem>
+                                                                               <SelectItem value='Romance'>Romance</SelectItem>
+                                                                               <SelectItem value='Fantasy'>Fantasy</SelectItem>
+                                                                               <SelectItem value='Historical'> Historical</SelectItem>
                                                        
                                                        </SelectGroup>
                                                      </SelectContent>
@@ -338,11 +345,13 @@ const UpdateItemForm = () => {
                                                          <SelectLabel>Streaming Platform</SelectLabel>
                                                         
                                                          <SelectItem value='netflix'> Netflix</SelectItem>
-                                                         <SelectItem value='amazon_prime_video'>Amazon Prime Video</SelectItem>
-                                                         <SelectItem value='disney+'>Disney+</SelectItem>
-                                                         <SelectItem value='hbo_max'>HBO Max</SelectItem>
-                                                         <SelectItem value='apple_tv'>Apple TV</SelectItem>
-                                                         <SelectItem value='peacock'>Peacock</SelectItem>
+                                                                               <SelectItem value='amazon_prime_video'>Amazon Prime Video</SelectItem>
+                                                                               <SelectItem value='disney+'>Disney+</SelectItem>
+                                                                               <SelectItem value='hbo'>HBO</SelectItem>
+                                                                               <SelectItem value='apple_tv'>Apple TV</SelectItem>
+                                                                               <SelectItem value='peacock'>Peacock</SelectItem>
+                                                                               <SelectItem value='paramount'>Paramount+</SelectItem>
+                                                                               <SelectItem value='hulu'>Hulu</SelectItem>
                                                        
                                                        </SelectGroup>
                                                      </SelectContent>

@@ -20,7 +20,8 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}:any) => {
     const {user} = useUser();
        const [showSpoiler, setShowSpoiler] = useState(false);
 
-       const [reviews, setReviews] = useState<TReview[]>([])
+       const [reviews, setReviews] = useState<TReview[]>([]);
+      
 
 
        useEffect(()=>{
@@ -33,25 +34,49 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}:any) => {
               getReviewData();
               
            },[id])
+
+
         
-           const handleReviewLike = async(id : string)=>{
-              if (!user?.id) {
-    toast.error("User ID is missing");
+  const handleReviewLike = async (reviewId: string) => {
+  if (!user?.id) {
+    toast.error("Please sign up or login");
     return;
   }
-            try {
-              const res = await addReviewLike({userId:user?.id, reviewId: id})
-          
-           if(res?.success==true){
-            toast.success('Review Like successfully added')
-           }else{
-            toast.warning('You have already like this review')
-           }
-            } catch (error) {
-              toast.error('Something went wrong!')
-            }
-           
-           }
+
+  try {
+    const res = await addReviewLike({ userId: user.id, reviewId });
+
+    if (res?.success === true) {
+      toast.success("Review Like successfully added");
+
+      setReviews(prevReviews =>
+        prevReviews.map(review =>
+          review.id === reviewId
+            ? {
+                ...review,
+                reviewLike: [
+                  ...review.reviewLike,
+                  {
+                    id: Date.now().toString(), // fake ID for frontend update
+                    userId: user.id,
+                    reviewId: reviewId,
+                  },
+                ],
+              }
+            : review
+        )
+      );
+    } else {
+      toast.warning("You have already liked this review");
+    }
+  } catch (error) {
+    toast.error("Something went wrong!");
+  }
+};
+
+
+
+
     return (
         <div>
 
@@ -76,22 +101,28 @@ const MediaReview: React.FC<MediaReviewProps>  = ({id}:any) => {
           {rev.spoiler && !showSpoiler ? (
             <div className="text-center">
               <p className="italic text-muted-foreground">This review contains spoilers.</p>
-              <Button size="sm" onClick={() => setShowSpoiler(true)}>
+              {
+                <Button size="sm" onClick={() => setShowSpoiler(true)}>
                 Show Spoiler
               </Button>
+              }
+              
             </div>
           ) : (
             <p className="text-base leading-relaxed">{rev.content}</p>
           )}
         </CardContent>
         <div className='flex justify-center items-center space-x-2 text-xl'>
-            <Button variant="outline" className='cursor-pointer'><i className="fa-solid fa-heart"
+          {
+             (user && user.role=='USER') &&   <Button variant="outline" className='cursor-pointer'><i className="fa-solid fa-heart"
             onClick={()=>handleReviewLike(rev.id as string)}
             ></i></Button>
+          }
+          
             <Dialog>
                   <DialogTrigger asChild>
                   {
-                    <Button variant="outline" 
+                   (user && user.role=='USER') && <Button variant="outline" 
                     className='cursor-pointer' 
                     ><i className="fa-solid fa-comment"></i></Button>
                   }

@@ -50,7 +50,7 @@ const RegisterForm = () => {
 
       const res = await registerUser(initialData);
 
-      console.log(res)
+ 
       
       form.reset();
       router.push('/');

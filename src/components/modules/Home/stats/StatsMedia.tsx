@@ -45,7 +45,7 @@ const StatsMedia = () => {
 
     <div className="stat flex flex-col items-center p-4 bg-card rounded-lg shadow hover:shadow-lg transition duration-300">
       <div className="stat-title text-lg font-semibold text-gray-600 text-center">Reviews</div>
-      <div className="stat-value text-4xl font-bold text-blue-600 text-center">{statsData?.averageMediaRating}+</div>
+      <div className="stat-value text-4xl font-bold text-blue-600 text-center">{statsData?.averageMediaRating.toFixed(1)}+</div>
       <div className="stat-desc text-sm text-gray-500 text-center">10-rated media avg reviews</div>
     </div>
 
