@@ -1,8 +1,10 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { getNewlyAddedMedia } from '@/services/Statistics';
 import { TMedia } from '@/types/item';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 const NewlyAdded = () => {
@@ -37,6 +39,14 @@ const NewlyAdded = () => {
                   <h3 className="text-lg font-bold">{item.title}</h3>
                   <p>Year: {item.year}</p>
                 </CardContent>
+                 <div className='flex justify-between items-center'>
+                <p className='ml-5'>{item.status}</p>
+                <Link className='mr-5' href={`/all-medias/${item.id}`}>
+                <Button variant="outline" className="w-full sm:w-auto">
+                  View Details
+                </Button>
+              </Link>
+               </div>
               </Card>
             ))}
           </div>

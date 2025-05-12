@@ -10,7 +10,7 @@ const QuickAccess = () => {
 
     return (
         <div className='lg:w-[85%] w-[95%] mx-auto my-12'>
-            <h2 className="text-2xl font-semibold mb-4">Quick Access</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-center">Quick Access</h2>
                   <Tabs defaultValue="top-rated">
                     <div className='flex justify-between items-center'>
                       <TabsList className="flex gap-4">

@@ -24,7 +24,7 @@ const feedbackData = [
         feedbackUserPhoto:'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
         name: 'Jack Robart',
         lifeStyle:'Engineering',
-        feedBack:'The car rental system is very efficient and user-friendly. I loved the seamless booking experience'
+        feedBack:"The storyline was gripping and the cinematography was stunning. I couldn’t take my eyes off the screen for a moment"
     },
     {
         id:'2',
@@ -32,7 +32,8 @@ const feedbackData = [
         name: 'David Smith',
         lifeStyle:'Frequent Traveler',
 
-        feedBack:'I recently used this car rental service for a week-long trip, and I must say it exceeded my expectations. The pricing was reasonable, the vehicle selection was impressive'
+        feedBack:"I binge-watched the entire season in one weekend! The characters are so well-developed, and the plot twists are jaw-dropping."
+  
     },
     {
         id:'3',
@@ -40,7 +41,7 @@ const feedbackData = [
 
         name: 'Sophia Martinez',
         lifeStyle:'Business Consultant',
-        feedBack:'I booked a luxury car for a business meeting, and the experience was phenomenal. The vehicle was clean, well-maintained, and delivered on time.'
+        feedBack:"Great weekend entertainment. Some episodes were slow, but the overall series was enjoyable and well-acted."
     },
     {
         id:'4',
@@ -48,14 +49,15 @@ const feedbackData = [
         feedbackUserPhoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAe9NZZk7nUE_anJir2Scf7tsqMHRdEpCbJg&s',
         name: 'Robert Williams',
         lifeStyle:'Adventure Enthusiast',
-        feedBack:'I rented an SUV for an off-road adventure, and I was truly impressed by the quality of the vehicle. It was in top condition, equipped with all necessary safety features'
+        feedBack:"The emotional depth of the movie really touched me. The lead actor’s performance was absolutely phenomenal."
     },
     {
         id:'5',
         feedbackUserPhoto:'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?cs=srgb&dl=pexels-olly-774909.jpg&fm=jpg',
         name: 'Emma Johnson',
         lifeStyle:'Family Traveler',
-        feedBack:'My family and I rented a minivan for a road trip, and it was an excellent decision. The car was spacious, comfortable, and had all the necessary amenities for a long journey.'
+        feedBack: "We watched this movie as a family and everyone loved it! It had humor, heart, and a message worth remembering."
+
 
     },
 ]

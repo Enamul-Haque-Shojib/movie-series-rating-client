@@ -11,7 +11,7 @@ const Features = () => {
 
   return (
     <div className="lg:w-[85%] w-[95%] mx-auto my-12">
-        <h2 className="text-2xl font-semibold mb-4">Featured : Highest Rated Movie and Series</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-center">Highest Rated Movie and Series</h2>
           <Tabs defaultValue="movies">
             <div className='flex justify-between items-center'>
                  <TabsList className="flex gap-4">
