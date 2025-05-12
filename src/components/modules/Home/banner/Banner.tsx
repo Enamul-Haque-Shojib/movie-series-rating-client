@@ -12,7 +12,7 @@ const Banner = () => {
       <div
         style={{
           backgroundImage:
-            "url('https://yt3.googleusercontent.com/EpteToOMghHwLcRsNalRK3I7YsjdFkcI1J7O2LcRzaHJkAB8jq-4hJLAZ1l07HYOIYoba3Xnog=s900-c-k-c0x00ffffff-no-rj')",
+            "url('https://images.squarespace-cdn.com/content/v1/5fbc4a62c2150e62cfcb09aa/1696229900387-O1WTJC85L4P45RQURSHB/disney.jpeg')",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -35,12 +35,11 @@ const Banner = () => {
               textShadow: "3px 3px 6px rgba(0, 0, 0, 0.7)",
             }}
           >
-            Movie and Series
+            Movie World
           </h1>
          
-          <p className="text-lg md:text-xl lg:text-2xl font-medium max-w-2xl text-black">
-            Secure, fast, and reliable product tracking made effortless. Manage
-            your products with ease and confidence.
+          <p className="text-lg md:text-xl lg:text-2xl font-medium max-w-2xl text-white">
+            Dive into a world of captivating stories, thrilling series, and blockbuster hits. Track what you watch, rate your favorites, and explore what’s trending, all in one place.
           </p>
       
         </div>
