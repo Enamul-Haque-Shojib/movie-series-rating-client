@@ -39,7 +39,7 @@ Base URL: [https://movie-series-rating-client.vercel.app/](https://movie-series-
 
 
 
-### ✅ 5. **Credentials**
+### ✅ **Credentials**
  #### Admin:
  - email: admin@gmail.com
  - pass: 123456789
@@ -48,7 +48,7 @@ Base URL: [https://movie-series-rating-client.vercel.app/](https://movie-series-
  - pass: 123456789
 
 
-### ✅ 5. **Key Features**
+### ✅ **Key Features**
 
 Bullet-point list of what API/system can do.
 
